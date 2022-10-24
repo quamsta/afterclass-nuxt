@@ -52,10 +52,10 @@ jobs:
           key: npm-packages-${{ hashFiles('**/package-lock.json') }}
           restore-keys: npm-packages-
 
-      - name: Globally update npm
-        run: npm install -g npm@latest
+      - name: Globally update yarn
+        run: npm install -g yarn@latest
 
-      - run: npm install
+      - run: yarn install
 
       # Debugging messages.
       # - run: echo "${{ github.ref }}"
@@ -72,18 +72,8 @@ jobs:
       - name: Main branch preparations
         if: github.ref == format('refs/heads/{0}', env.MAIN_BRANCH)
         run: |
-          npm run build --base=/
+          yarn generate
           cp -a $GITHUB_WORKSPACE/.output/public/* $GITHUB_WORKSPACE/gh-pages
-
-      # If develop branch:
-      #   - Remove existing 'latest' directory, if it exists.
-      #   - Move build into 'latest' directory.
-      - name: Develop branch preparations
-        if: github.ref == format('refs/heads/{0}', env.DEVELOP_BRANCH)
-        run: |
-          npm run build --base=/latest/
-          rm -rf $GITHUB_WORKSPACE/gh-pages/latest
-          mv $GITHUB_WORKSPACE/.output/public $GITHUB_WORKSPACE/gh-pages/latest
 
       # Look at the 'gh-pages' directory to see if everything looks right.
       #      - run: ls -lah $GITHUB_WORKSPACE/gh-pages

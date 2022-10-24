@@ -13,8 +13,7 @@ const route = useRoute();
 const { data: feed } = await useFetch(
   "https://content.uiowa.edu/api/v1/node/" + route.params.id + ".json",
   {
-    initialCache: false,
-    server: false,
+    key: route.params.id,
   }
 );
 </script>

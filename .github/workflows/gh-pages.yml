@@ -72,7 +72,7 @@ jobs:
       - name: Main branch preparations
         if: github.ref == format('refs/heads/{0}', env.MAIN_BRANCH)
         run: |
-          yarn generate
+          NUXT_APP_BASE_URL=/afterclass-nuxt/ yarn generate
           cp -a $GITHUB_WORKSPACE/.output/public/* $GITHUB_WORKSPACE/gh-pages
 
       # Look at the 'gh-pages' directory to see if everything looks right.

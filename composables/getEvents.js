@@ -7,7 +7,10 @@ async function getEvents() {
 
 async function getEvent(id) {
   const { data: feed } = await useFetch(
-    "https://content.uiowa.edu/api/v1/node/" + id + ".json"
+    "https://content.uiowa.edu/api/v1/node/" + id + ".json",
+    {
+      key: id,
+    }
   );
   return feed;
 }

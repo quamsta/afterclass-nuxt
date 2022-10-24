@@ -31,8 +31,8 @@
       </div>
 
       <div class="col-lg-6">
-        <iframe src="/newsletter-preview" width="100" height="100"> </iframe>
-        <!--<label :for="outputHTML">Copy/Paste HTML:</label>
+        <!-- <iframe src="/newsletter-preview" width="100" height="100"> </iframe> -->
+        <label :for="outputHTML">Copy/Paste HTML:</label>
         <textarea
           readonly
           rows="40"
@@ -1768,7 +1768,6 @@
 
     
         </textarea>
-    -->
       </div>
     </div>
   </div>

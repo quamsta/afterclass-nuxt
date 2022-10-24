@@ -73,7 +73,7 @@ jobs:
         if: github.ref == format('refs/heads/{0}', env.MAIN_BRANCH)
         run: |
           NUXT_APP_BASE_URL=/afterclass-nuxt/ yarn generate
-          cp -a $GITHUB_WORKSPACE/.output/public/* $GITHUB_WORKSPACE/gh-pages
+          cp -a $GITHUB_WORKSPACE/.output/public/. $GITHUB_WORKSPACE/gh-pages
 
       # Look at the 'gh-pages' directory to see if everything looks right.
       #      - run: ls -lah $GITHUB_WORKSPACE/gh-pages

@@ -84,7 +84,7 @@ jobs:
         run: |
           npm run build --base=/latest/
           rm -rf $GITHUB_WORKSPACE/gh-pages/latest
-          mv $GITHUB_WORKSPACE/.output/public/ $GITHUB_WORKSPACE/gh-pages/latest
+          mv $GITHUB_WORKSPACE/.output/public $GITHUB_WORKSPACE/gh-pages/latest
 
       # Look at the 'gh-pages' directory to see if everything looks right.
       #      - run: ls -lah $GITHUB_WORKSPACE/gh-pages

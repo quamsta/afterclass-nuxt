@@ -1,0 +1,23 @@
+@import 'variables.scss';
+
+// Then include the following
+@import 'bootstrap/scss/bootstrap.scss';
+// @import 'bootstrap-vue/src/index.scss';
+
+// And define any of your custom or additional CSS/SCSS here,
+// or via an @import
+
+@import "components/header";
+
+@import "components/footer-theme";
+@import "components/map";
+@import "components/related";
+@import "components/slider";
+@import "components/social-card";
+@import "components/forms";
+@import "components/buttons";
+@import "components/trending";
+
+@import "layouts/calendar";
+@import "layouts/page";
+@import "layouts/event";

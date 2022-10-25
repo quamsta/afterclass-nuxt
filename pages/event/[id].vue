@@ -13,7 +13,7 @@
             <!-- <% if $Image.Orientation=="Wide" %> -->
             <!-- <% if $IsLateNight %> -->
             <img class="card__banner-img" alt="Late Night Programs Flag" role="presentation"
-              src="$ThemeDir/dist/images/latenightbanner.png" />
+              src="~/assets/images/latenightbanner.png" />
             <!-- <% end_if %> -->
             <img class="d-block w-100 mb-2 lazyload" data-src="$Image.URL"
               alt="Poster for this event. Please read the event description for more information."
@@ -174,7 +174,7 @@
             </p>
             <!-- <% if $IsLateNight %> -->
             <div class="late-night-feature">
-              <p><img class="late-night-feature__flag" src="{$ThemeDir}/dist/images/latenightbanner.png"
+              <p><img class="late-night-feature__flag" src="~/assets/images/latenightbanner.png"
                   alt="Late Night Programs Flag" role="presentation" />This event is part of Late Night Programs, <a
                   href="events/interest/7491/">see more events tagged as Late Night Programs.</a></p>
               <p class="late-night-feature__smalltext"><a href="https://getinvolved.uiowa.edu/campus-programs/latenight"

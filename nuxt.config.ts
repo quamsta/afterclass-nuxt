@@ -32,17 +32,27 @@ export default defineNuxtConfig({
             }
         ]
     },
+    googleFonts: {
+        families: {
+            Roboto: true,
+            'Roboto+Condensed': true,
+            'Zilla+Slab': true
+        }
+    },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     // css: ['~/assets/scss/main.scss'],
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    // plugins: ['~/plugins/bootstrap.js'],
+    plugins: [
+        //'~/plugins/bootstrap.js',
+        '~/plugins/fontawesome.js'
+    ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [],
+    buildModules: ['@nuxtjs/google-fonts'],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
@@ -56,6 +66,14 @@ export default defineNuxtConfig({
     // },
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        extractCSS: true
+        extractCSS: true,
+
+
+        transpile: [
+            '@fortawesome/vue-fontawesome',
+            '@fortawesome/fontawesome-svg-core',
+            '@fortawesome/free-solid-svg-icons'
+        ]
+
     }
 })

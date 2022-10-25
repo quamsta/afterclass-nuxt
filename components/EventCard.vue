@@ -4,9 +4,7 @@
  		<img class="card__banner-img" alt="Late Night Programs Flag" role="presentation" src="$ThemeDir/dist/images/latenightbanner.png" />
  	<% end_if %> -->
     <!-- <% if $Image.URL %> -->
-    <NuxtLink :to="/event/ + id" v-if="hasImage"
-      ><img class="card-img-top" :src="imageSrc" loading="lazy"
-    /></NuxtLink>
+    <NuxtLink :to="eventLink" v-if="hasImage"><img class="card-img-top" :src="imageSrc" loading="lazy" /></NuxtLink>
     <!-- <% end_if %> -->
     <div class="card-body">
       <h3 class="card-title">
@@ -36,10 +34,14 @@ var imageSrc;
 var imageHeight;
 var imageWidth;
 
+var eventLink = '/event/' + id;
+
 if (hasImage) {
-  imageSrc = props.event.media[0].original_image;
+  imageSrc = props.event.media[0].medium_image;
   imageHeight = props.event.media[0].original_height;
   imageWidth = props.event.media[0].original_width;
   // console.log(imageSrc);
 }
+
+
 </script>

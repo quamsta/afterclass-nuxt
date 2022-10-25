@@ -1,24 +1,8 @@
-.header__container {
-
-
-    /*background: #000;
-    border-bottom: 4px solid $gold;
-
-    &--small {
-        border-bottom: 4px solid #63666A;
-    }
-
-    */
-
-}
-
-
 .navbar-main {
     color: #262626;
     background: #000;
 
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 
     .nav-item:after,
     .nav-item-active:after {
@@ -85,7 +69,9 @@
         }
     }
 
-    .fa,.fas {
+    .fa,
+    .fas,
+    .svg-inline--fa {
         color: $gold;
 
 
@@ -102,21 +88,6 @@
 }
 
 .nav-item {}
-
-.svg-icon {
-    display: inline-flex;
-    align-self: center;
-}
-
-.svg-icon svg {
-    height: 1.2em;
-    width: 1.2em;
-}
-
-.svg-icon.svg-baseline svg {
-    top: .125em;
-    position: relative;
-}
 
 .nav-link:focus,
 .nav-link:hover {

@@ -22,7 +22,8 @@ $gray: #63666A;
 $light: $gray-100;
 $dark: #000;
 
-$theme-colors: ();
+$theme-colors: (
+);
 $theme-colors: map-merge(("gold": $gold, "white": $white), $theme-colors);
 
 $link-color: $gold;
@@ -43,21 +44,25 @@ $secondary: #111;
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
 
-$grid-breakpoints: (xs: 0,
-sm: 576px,
-md: 768px,
-lg: 992px,
-xl: 1300px);
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1300px
+);
 
 
 // Grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
 
-$container-max-widths: (sm: 540px,
-md: 720px,
-lg: 960px,
-xl: 1300px);
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1300px
+);
 
 $navbar-brand-padding-y: 0;
 $navbar-padding-y: 0;
@@ -65,9 +70,9 @@ $navbar-dark-color: #fff;
 // Fonts
 $enable-responsive-font-sizes: true;
 $font-family-base: "Roboto",
-sans-serif;
+    sans-serif;
 $headings-font-family: "Roboto Condensed",
-sans-serif;
+    sans-serif;
 $font-size-base: 1.1rem;
 $headings-font-weight: 600;
 $h1-font-size: $font-size-base * 3;
@@ -76,13 +81,6 @@ $h2-font-size: $font-size-base * 2;
 $jumbotron-padding: 6rem;
 $jumbotron-color: #333;
 $jumbotron-bg: #f6f9fc;
-
-// Spacing
-$spacer: 1rem;
-$spacers: (6: ($spacer * 4.5),
-7: ($spacer * 6),
-8: ($spacer * 9),
-9: ($spacer * 12));
 
 $list-group-bg: #222;
 $list-group-border-color: #333;

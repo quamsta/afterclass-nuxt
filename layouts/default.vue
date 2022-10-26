@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <slot />
-    </div>
+  <div>
+    <slot />
     <Footer />
+  </div>
 </template>
 
 <script>
-
 </script>

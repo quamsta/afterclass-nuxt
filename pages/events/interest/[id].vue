@@ -1,15 +1,13 @@
 <template>
-    <div>
-        <HeaderSmall />
-        <h1>{{ event.title }}</h1>
-        <p>Current id is: {{ route.params.id }}</p>
+  <div>
+    <HeaderSmall />
+    <div class="container-fluid content-container" id="content">
+      <h1 class="filter-header">Events tagged with: [Interest Here]</h1>
     </div>
+  </div>
 </template>
 <script setup>
-const route = useRoute();
-const event = await getEvent(route.params.id);
 </script>
   
 <style scoped>
-
 </style>

@@ -2,22 +2,29 @@
   <div>
     <HeaderSmall />
 
-
-    <div class="container content-container " role="main" id="content">
-
+    <div class="container content-container" role="main" id="content">
       <!-- <div class="row d-flex <% if $Image.Orientation != " Wide" %>pt-4 pt-xl-5<% end_if %> justify-content-center"> -->
       <div class="row d-flex pt-4 pt-xl-5 justify-content-center">
         <div class="col-lg-7 col-xl-8">
           <article>
-
             <!-- <% if $Image.Orientation=="Wide" %> -->
             <!-- <% if $IsLateNight %> -->
-            <img class="card__banner-img" alt="Late Night Programs Flag" role="presentation"
-              src="~/assets/images/latenightbanner.png" />
+            <img
+              class="card__banner-img"
+              alt="Late Night Programs Flag"
+              role="presentation"
+              src="~/assets/images/latenightbanner.png"
+            />
             <!-- <% end_if %> -->
-            <img class="d-block w-100 mb-2 lazyload" data-src="$Image.URL"
-              alt="Poster for this event. Please read the event description for more information."
-              data-aspectratio="$Image.Ratio" />
+            <img
+              class="d-block w-100 mb-2"
+              :src="event.media[0].large_image"
+              alt="Poster for this event. Please read the event description
+            for more information."
+              :height="event.media[0].original_height"
+              :width="event.media[0].original_width"
+              v-if="event.media[0]"
+            />
             <!-- <% else_if $Image.URL %> -->
             <!-- <img class="float-right p-2 d-sm-block d-lg-none w-50 mb-2 lazyload" data-src="$Image.URL"
                       alt="Poster for this event. Please read the event description for more information."
@@ -45,12 +52,12 @@
                                               <% else %>
                                                 No upcoming dates. <br />
                                                 <% end_if %> -->
-
               </p>
 
               <p>
                 <!-- <% if $isOnline %> -->
-                <strong>Location: </strong><i aria-hidden="true" class="fas fa-laptop"></i>Virtual
+                <strong>Location: </strong
+                ><i aria-hidden="true" class="fas fa-laptop"></i>Virtual
                 Event<br />
                 <!-- <% else %> -->
 
@@ -71,8 +78,6 @@
                 </span>
                 <!-- <% end_if %>
                                     <% end_if %> -->
-
-
               </p>
               <!-- <% end_if %> -->
               <p>
@@ -80,21 +85,35 @@
                 <!-- 
                                 <% if $OnlineLocationUrl %>
                                   <% if $OnlineLocationType=="Zoom" %> -->
-                <a class="btn btn-primary btn-zoom mb-1" href="$OnlineLocationUrl" rel="noopener" target="_blank">Zoom
-                  link <i aria-hidden="true" class="fas fa-video"></i></a>
+                <a
+                  class="btn btn-primary btn-zoom mb-1"
+                  href="$OnlineLocationUrl"
+                  rel="noopener"
+                  target="_blank"
+                  >Zoom link <i aria-hidden="true" class="fas fa-video"></i
+                ></a>
                 <!-- <% else %> -->
-                <a class="btn btn-primary mb-1" href="$OnlineLocationUrl" rel="noopener" target="_blank">Virtual event
-                  link <i aria-hidden="true" class="fas fa-laptop-house"></i></a>
+                <a
+                  class="btn btn-primary mb-1"
+                  href="$OnlineLocationUrl"
+                  rel="noopener"
+                  target="_blank"
+                  >Virtual event link
+                  <i aria-hidden="true" class="fas fa-laptop-house"></i
+                ></a>
                 <!-- <% end_if %>
                                         <% end_if %>
                                           <% if $MoreInfoLink %> -->
-                <a href="$MoreInfoLink" class="btn btn-outline-primary mb-1" target="_blank">Event website <i
-                    aria-hidden="true" class="fas fa-external-link-alt"></i></a>
+                <a
+                  href="$MoreInfoLink"
+                  class="btn btn-outline-primary mb-1"
+                  target="_blank"
+                  >Event website
+                  <i aria-hidden="true" class="fas fa-external-link-alt"></i
+                ></a>
                 <!-- <% end_if %>
                                               <% end_if %> -->
-
               </p>
-
             </div>
             <div class="content" v-html="event.description"></div>
             <div class="event-details" id="all-dates">
@@ -110,13 +129,27 @@
               <!-- <% end_if %> -->
 
               <!-- <% if $Dates.Count> 10 %> -->
-              <p><button class="btn btn-outline-white br-0 btn-secondary" type="button" data-toggle="collapse"
-                  data-target="#moreDates" aria-expanded="false" aria-controls="moreDates">
-                  More Dates <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-plus" viewBox="0 0 16 16">
+              <p>
+                <button
+                  class="btn btn-outline-white br-0 btn-secondary"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#moreDates"
+                  aria-expanded="false"
+                  aria-controls="moreDates"
+                >
+                  More Dates
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-plus"
+                    viewBox="0 0 16 16"
+                  >
                     <path
-                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-
+                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                    />
                   </svg>
                 </button>
               </p>
@@ -136,17 +169,23 @@
               <p>Sponsored by: $Sponsor</p>
               <!-- <% end_if %> -->
               <!-- <% if $Tags %> -->
-              <p>Tagged as:
+              <p>
+                Tagged as:
                 <!-- <% loop $Tags %> -->
-                <a href="$Link" class="btn btn-outline-white btn-sm mb-1">$Title</a>
+                <a href="$Link" class="btn btn-outline-white btn-sm mb-1"
+                  >$Title</a
+                >
                 <!-- <% end_loop %> -->
               </p>
 
               <!-- <% end_if %> -->
               <!-- <% if $Types %> -->
-              <p>Categorized under:
+              <p>
+                Categorized under:
                 <!-- <% loop $Types %> -->
-                <a href="$Link" class="btn btn-outline-white btn-sm mb-1">$Title</a>
+                <a href="$Link" class="btn btn-outline-white btn-sm mb-1"
+                  >$Title</a
+                >
                 <!-- <% end_loop %> -->
               </p>
 
@@ -155,8 +194,13 @@
             <!-- <% if $UiCalendarLink %> -->
             <p>
               <!-- <% if $UiCalendarLink %> -->
-              <a href="$UiCalendarLink" class="btn btn-outline-white mb-2" target="_blank">View on the UI
-                Events Calendar <i aria-hidden="true" class="fas fa-external-link-alt"></i></a>
+              <a
+                href="$UiCalendarLink"
+                class="btn btn-outline-white mb-2"
+                target="_blank"
+                >View on the UI Events Calendar
+                <i aria-hidden="true" class="fas fa-external-link-alt"></i
+              ></a>
               <!-- <% end_if %> -->
               <!-- <%-- <a class="btn btn-secondary" href="$CalendarLink">Add to your calendar <i
                                   aria-hidden="true" class="fas fa-calendar-alt"></i></a> --%> -->
@@ -164,28 +208,46 @@
             <!-- <% end_if %> -->
             <!-- <% if $ContactEmail %> -->
             <hr />
-            <p>Questions about this event?
+            <p>
+              Questions about this event?
               <!-- <% if $ContactName %> -->
-              <a href="mailto:$ContactEmail" class="report-problem-link">Contact {$ContactName}.</a>
+              <a href="mailto:$ContactEmail" class="report-problem-link"
+                >Contact {$ContactName}.</a
+              >
               <!-- <% else %> -->
-              <a href="mailto:$ContactEmail" class="report-problem-link">Email {$ContactEmail}.</a>
+              <a href="mailto:$ContactEmail" class="report-problem-link"
+                >Email {$ContactEmail}.</a
+              >
               <!-- <% end_if %> -->
-
             </p>
             <!-- <% if $IsLateNight %> -->
             <div class="late-night-feature">
-              <p><img class="late-night-feature__flag" src="~/assets/images/latenightbanner.png"
-                  alt="Late Night Programs Flag" role="presentation" />This event is part of Late Night Programs, <a
-                  href="events/interest/7491/">see more events tagged as Late Night Programs.</a></p>
-              <p class="late-night-feature__smalltext"><a href="https://getinvolved.uiowa.edu/campus-programs/latenight"
-                  target="_blank">Learn
-                  more about Late Night Programs</a></p>
+              <p>
+                <img
+                  class="late-night-feature__flag"
+                  src="~/assets/images/latenightbanner.png"
+                  alt="Late Night Programs Flag"
+                  role="presentation"
+                />This event is part of Late Night Programs,
+                <a href="events/interest/7491/"
+                  >see more events tagged as Late Night Programs.</a
+                >
+              </p>
+              <p class="late-night-feature__smalltext">
+                <a
+                  href="https://getinvolved.uiowa.edu/campus-programs/latenight"
+                  target="_blank"
+                  >Learn more about Late Night Programs</a
+                >
+              </p>
             </div>
             <!-- 
                               <% end_if %>
                                 <% end_if %> -->
-            <p><i>Individuals with disabilities are encouraged to attend all University of
-                Iowa–sponsored events.
+            <p>
+              <i
+                >Individuals with disabilities are encouraged to attend all
+                University of Iowa–sponsored events.
 
                 <!-- <% if $ContactName %> -->
 
@@ -212,7 +274,6 @@
                                                     href="tel:319-335-3557">319-335-3557</a> or <a
                                                     href="mailto:vp-student-life@uiowa.edu">vp-student-life@uiowa.edu</a>.
                                                   <% end_if %> -->
-
               </i>
             </p>
           </article>
@@ -274,17 +335,27 @@
             <% end_if %>
               <% end_if %>  -->
       </div>
-
     </div>
-
-
   </div>
 </template>
 <script setup>
 const route = useRoute();
 const event = await getEvent(route.params.id);
+
+// @todo move to computed function? we're repeating event card image functions here:
+const hasImage = "media" in event;
+
+var imageSrc;
+var imageHeight;
+var imageWidth;
+
+if (hasImage) {
+  imageSrc = event.media[0].large_image;
+  imageHeight = event.media[0].original_height;
+  imageWidth = event.media[0].original_width;
+  // console.log(imageSrc);
+}
 </script>
 
 <style scoped>
-
 </style>

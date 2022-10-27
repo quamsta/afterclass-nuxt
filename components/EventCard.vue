@@ -5,13 +5,14 @@
  	<% end_if %> -->
     <!-- <% if $Image.URL %> -->
     <NuxtLink :to="eventLink" v-if="hasImage"
-      ><img
+      ><nuxt-img
         class="card-img-top"
-        :src="imageSrc"
+        :src="event.media[0].large_image"
         loading="lazy"
-        v-if="event.media[0]"
+        v-if="event.media"
         :height="event.media[0].original_height"
         :width="event.media[0].original_width"
+        placeholder
     /></NuxtLink>
     <!-- <% end_if %> -->
     <div class="card-body">
@@ -43,11 +44,4 @@ var imageHeight;
 var imageWidth;
 
 var eventLink = "/event/" + id;
-
-if (hasImage) {
-  imageSrc = props.event.media[0].medium_image;
-  imageHeight = props.event.media[0].original_height;
-  imageWidth = props.event.media[0].original_width;
-  // console.log(imageSrc);
-}
 </script>

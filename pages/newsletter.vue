@@ -18,9 +18,11 @@
                 :id="'featured-event-' + index"
                 :name="'featured-event-' + index"
                 class="form-select"
-                v-model="featuredEvents[index]"
+                v-model="featuredEventIds[index]"
               >
-                <option value="0" label="(No event)">0</option>
+                <option value="0" label="(No event)" @click="updateHtmlGen">
+                  0
+                </option>
                 <option
                   @click="updateHtmlGen($event.target.value)"
                   v-for="event in eventFeed.events"
@@ -62,30 +64,22 @@ import { ref } from "vue";
 const eventFeed = await getEvents();
 //const htmlGen = getExampleNewsletterHtml();
 const htmlGen = ref("");
-const featuredEvents = ref([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+const featuredEventIds = ref([0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
-// Run this initially:
+// Run this initially to get an empty template to preview:
 updateHtmlGen();
 
 function updateHtmlGen(id) {
-  // var event = getEventFromFeed(eventFeed, id);
-  //   console.log(featuredEvents);
-
   var featuredEventArray = [];
-
-  console.log(featuredEvents.value);
-
-  featuredEvents.value.forEach(function (element, index) {
-    //console.log(element);
-    if (element != 0) {
-      var event = getEventFromFeed(eventFeed, element);
-      featuredEventArray.push(getEventFromFeed(eventFeed, element));
+  featuredEventIds.value.forEach(function (element, index) {
+    if (element == 0) {
+      featuredEventArray[index] = null;
+    } else {
+      featuredEventArray[index] = getEventFromFeed(eventFeed, element);
     }
   });
-  //   featuredEventArray.push(event);
 
-  var html = getHtmlGen(featuredEventArray);
-  htmlGen.value = html;
+  htmlGen.value = getHtmlGen(featuredEventArray);
 }
 
 function getHtmlGen(featuredEventArray) {
@@ -94,8 +88,9 @@ function getHtmlGen(featuredEventArray) {
   htmlGen += getNewsletterHeaderTextHtml(headerText);
 
   featuredEventArray.forEach(function (element, index) {
-    console.log(element);
-    htmlGen += getNewsletterFeaturedEventHtml(element.event);
+    if (element != null) {
+      htmlGen += getNewsletterFeaturedEventHtml(element.event);
+    }
   });
 
   htmlGen += getNewsletterFooterHtml();
@@ -104,9 +99,6 @@ function getHtmlGen(featuredEventArray) {
 }
 
 function getEventFromFeed(eventFeed, id) {
-  // Gets a bunch of values based on an array of values, might be good for collecting
-  // featured stuff later:
-  //var item = eventFeed.value.events.filter(({id}) => !activeIds.includes(id));
   var item = eventFeed.value.events.find(function (element, index, array) {
     if (element.event.id == this) {
       return element.event;
@@ -117,7 +109,7 @@ function getEventFromFeed(eventFeed, id) {
 }
 </script>
   
-<style scoped>
+<style>
 .output-html {
   font-family: monospace;
   font-size: 10px;

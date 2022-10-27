@@ -16,7 +16,7 @@
               src="~/assets/images/latenightbanner.png"
             />
             <!-- <% end_if %> -->
-            <img
+            <nuxt-img
               class="d-block w-100 mb-2"
               :src="event.media[0].large_image"
               alt="Poster for this event. Please read the event description
@@ -24,6 +24,7 @@
               :height="event.media[0].original_height"
               :width="event.media[0].original_width"
               v-if="event.media[0]"
+              placeholder
             />
             <!-- <% else_if $Image.URL %> -->
             <!-- <img class="float-right p-2 d-sm-block d-lg-none w-50 mb-2 lazyload" data-src="$Image.URL"

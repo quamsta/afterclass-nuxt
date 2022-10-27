@@ -16,14 +16,14 @@
               src="~/assets/images/latenightbanner.png"
             />
             <!-- <% end_if %> -->
-            <nuxt-img
-              class="d-block w-100 mb-2"
-              :src="event.media[0].large_image"
+            <img
+              class="d-block w-100 mb-2 event-image"
+              :src="eventFetched.media[0].large_image"
               alt="Poster for this event. Please read the event description
             for more information."
-              :height="event.media[0].original_height"
-              :width="event.media[0].original_width"
-              v-if="event.media[0]"
+              :height="eventFetched.media[0].original_height"
+              :width="eventFetched.media[0].original_width"
+              v-if="eventFetched.media[0]"
               placeholder
             />
             <!-- <% else_if $Image.URL %> -->
@@ -32,7 +32,7 @@
                       data-aspectratio="$Image.Ratio" />
                     <% end_if %> -->
 
-            <h1>{{ event.title }}</h1>
+            <h1>{{ eventFetched.title }}</h1>
             <div class="event-details">
               <!-- <% if $Dates || $Venue || $Location || $OnlineLocationUrl || $isOnline %> -->
 
@@ -116,7 +116,7 @@
                                               <% end_if %> -->
               </p>
             </div>
-            <div class="content" v-html="event.description"></div>
+            <div class="content" v-html="eventFetched.description"></div>
             <div class="event-details" id="all-dates">
               <!-- <% if $Dates.Count> 1 %> -->
               <h2>All dates for this event:</h2>
@@ -341,21 +341,9 @@
 </template>
 <script setup>
 const route = useRoute();
-const event = await getEvent(route.params.id);
+const eventFetched = await getEvent(route.params.id);
 
-// @todo move to computed function? we're repeating event card image functions here:
-const hasImage = "media" in event;
-
-var imageSrc;
-var imageHeight;
-var imageWidth;
-
-if (hasImage) {
-  imageSrc = event.media[0].large_image;
-  imageHeight = event.media[0].original_height;
-  imageWidth = event.media[0].original_width;
-  // console.log(imageSrc);
-}
+console.log(eventFetched);
 </script>
 
 <style scoped>

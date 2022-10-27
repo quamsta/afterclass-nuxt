@@ -99,10 +99,6 @@
   </div>
 </template>
 <style lang="scss">
-@import "~/node_modules/uids/src/assets/scss/reset.scss";
-@import "~/node_modules/uids/src/components/logo/logo.scss";
-@import "~/node_modules/uids/src/components/brand-bar/brand-bar.scss";
 </style>
 <script setup>
-import { UidsBrandBar } from "uids";
 </script>

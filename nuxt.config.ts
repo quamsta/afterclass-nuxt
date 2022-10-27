@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/google-fonts", "@nuxt/image-edge"],
+  buildModules: ["@nuxtjs/google-fonts"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <HeaderLarge />
     <div class="container-fluid">
       <masonry-wall
         :items="eventFeed.events"

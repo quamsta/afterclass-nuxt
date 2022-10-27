@@ -6,7 +6,7 @@
       <!-- <div class="row d-flex <% if $Image.Orientation != " Wide" %>pt-4 pt-xl-5<% end_if %> justify-content-center"> -->
       <div class="row d-flex pt-4 pt-xl-5 justify-content-center">
         <div class="col-lg-7 col-xl-8">
-          <article>
+          <article class="position-relative">
             <!-- <% if $Image.Orientation=="Wide" %> -->
             <!-- <% if $IsLateNight %> -->
             <img
@@ -337,6 +337,8 @@
               <% end_if %>  -->
       </div>
     </div>
+    <h2 class="text-center pt-4">More events</h2>
+    <MoreEvents />
   </div>
 </template>
 <script setup>

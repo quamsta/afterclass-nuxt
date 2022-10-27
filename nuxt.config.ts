@@ -37,7 +37,10 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Roboto: true,
+      Roboto: {
+        wght: [100, 300, 400],
+        ital: [100],
+      },
       "Roboto+Condensed": true,
       "Zilla+Slab": true,
     },

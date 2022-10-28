@@ -8,14 +8,7 @@
   </div>
 </template>
 <script setup>
-import {
-  isFriday,
-  isSaturday,
-  isSunday,
-  nextFriday,
-  nextSunday,
-  format,
-} from "date-fns";
+import { format } from "date-fns";
 import { ref } from "vue";
 const now = new Date();
 var start;

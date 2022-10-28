@@ -38,12 +38,29 @@
 
               <p class="m-0">
                 <!-- Dates will go here -->
-                Date(s): 
+                <!-- Upcoming Date(s):
                 <ul>
-                  <li v-for="instance in eventFetched.event_instances" :key="instance.id">{{ instance.event_instance.start }}</li>
-                </ul>
-                <span></span>
-                <!-- <span v-if="eventFetched.event_instances.count > 1"></span> -->
+                  <li v-for="date in upcomingDates" :key="date">{{ date }}</li>
+                </ul> -->
+
+                <span v-if="upcomingDates.length > 1"
+                  ><strong>Next date: </strong>
+                  <font-awesome-icon icon="fa-solid fa-calendar-alt" />
+                  {{ upcomingDates[0] }}
+                  <a href="#all-dates">More dates</a></span
+                >
+                <span v-if="upcomingDates.length == 1"
+                  ><strong>Date: </strong>
+                  <font-awesome-icon icon="fa-solid fa-calendar-alt" />{{
+                    upcomingDates[0]
+                  }}</span
+                >
+                <span v-if="upcomingDates.length == 0"
+                  ><strong>
+                    <font-awesome-icon icon="fa-solid fa-calendar-alt" /> This
+                    event occurred in the past.</strong
+                  ></span
+                >
                 <!-- <% if $Dates.Count> 1 %><strong>Next date:</strong>
                               <% else %><strong>Date:</strong>
                                 <% end_if %>
@@ -64,16 +81,25 @@
               <p>
                 <!-- <% if $isOnline %> -->
                 <span v-if="eventFetched.virtual">
-                <strong>Location: <i aria-hidden="true" class="fas fa-laptop"></i>Virtual
-                Event<br /></strong>
+                  <strong
+                    >Location:
+                    <i aria-hidden="true" class="fas fa-laptop"></i>Virtual
+                    Event<br
+                  /></strong>
                 </span>
                 <!-- <% else %> -->
 
                 <!-- <% if $Venue.Title || $Location %> -->
                 <span v-if="!eventFetched.virtual">
-                <strong> Location: <span v-if="eventFetched.room_number"> {{ eventFetched.room_number }}, </span> {{ eventFetched.location_name }}</strong>
-                <span itemprop="location">
-                  <!-- <% if $Location %> $Location<% if $Venue.Title %>,<% end_if %>
+                  <strong>
+                    Location:
+                    <span v-if="eventFetched.room_number">
+                      {{ eventFetched.room_number }},
+                    </span>
+                    {{ eventFetched.location_name }}</strong
+                  >
+                  <span itemprop="location">
+                    <!-- <% if $Location %> $Location<% if $Venue.Title %>,<% end_if %>
                                           <% end_if %>
                                             <% if $Venue.Title %>
                                               <% with $Venue %>
@@ -84,10 +110,10 @@
                                                     <% end_if %>
                                                       <% end_with %>
                                                         <% end_if %> -->
-                </span>
-                <!-- <% end_if %>
+                  </span>
+                  <!-- <% end_if %>
                                     <% end_if %> -->
-                                    </span>
+                </span>
               </p>
               <!-- <% end_if %> -->
               <p>
@@ -346,7 +372,13 @@
               <% end_if %>  -->
       </div>
     </div>
-    <h2 class="text-center pt-4" @click="toggleMoreEventsList" id="more-events-heading">More events</h2>
+    <h2
+      class="text-center pt-4"
+      @click="toggleMoreEventsList"
+      id="more-events-heading"
+    >
+      More events
+    </h2>
     <div v-if="isShowMoreEvents">
       <MoreEvents />
     </div>
@@ -357,6 +389,8 @@
 import { ref, defineAsyncComponent, onMounted } from "vue";
 const route = useRoute();
 const eventFetched = await getEvent(route.params.id);
+const upcomingDates = getUpcomingDates(eventFetched, "long");
+//const upcomingDates = ["06-07-1987"];
 
 const isShowMoreEvents = ref(false);
 const MoreEvents = defineAsyncComponent(() =>

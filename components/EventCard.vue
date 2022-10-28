@@ -4,12 +4,11 @@
  		<img class="card__banner-img" alt="Late Night Programs Flag" role="presentation" src="$ThemeDir/dist/images/latenightbanner.png" />
  	<% end_if %> -->
     <!-- <% if $Image.URL %> -->
-    <NuxtLink :to="eventLink" v-if="hasImage"
+    <NuxtLink :to="eventLink" v-if="event.media"
       ><img
         class="card-img-top"
         :src="event.media[0].large_image"
         loading="lazy"
-        v-if="event.media"
         :height="event.media[0].original_height"
         :width="event.media[0].original_width"
     /></NuxtLink>
@@ -26,7 +25,7 @@
       <!-- <% end_loop %> -->
       <!-- <% end_if %> -->
 
-      <!-- <div class="card-text"><% include EventCardDatesTimes %>$SummaryContent.Summary(30)</div> -->
+      <div class="card-text">{{ nextDate }}</div>
     </div>
   </div>
 </template>
@@ -35,12 +34,8 @@
 const props = defineProps(["event"]);
 
 const id = props.event.id;
-const title = props.event.title;
-const hasImage = "media" in props.event;
 
-var imageSrc;
-var imageHeight;
-var imageWidth;
+//const nextDate = getUpcomingDates(props.event).first;
 
 var eventLink = "/event/" + props.event.id;
 </script>

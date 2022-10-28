@@ -12,14 +12,13 @@
               >
             </h3>
             <!-- SnapWidget -->
-
             <iframe
               src="https://snapwidget.com/embed/881820"
               class="snapwidget-widget"
               allowtransparency="true"
               frameborder="0"
               scrolling="no"
-              style="border: none; overflow: hidden; width: 100%; height: 400px"
+              style="border: none; overflow: hidden; width: 100%"
             ></iframe>
           </div>
         </div>

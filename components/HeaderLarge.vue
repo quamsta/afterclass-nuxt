@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header__container">
-      <div class="container-fluid">
+      <div class="">
         <div class="row d-none d-lg-block">
           <div class="col-lg-12 content-container title__container">
             <div class="header-graphic">
@@ -10,6 +10,8 @@
                   class="header-graphic__img"
                   src="~/assets/images/header.png"
                   alt="After Class: UI Culture, arts, and entertainment."
+                  width="2880"
+                  height="786"
                 />
               </NuxtLink>
             </div>

@@ -23,7 +23,7 @@
             for more information."
               :height="eventFetched.media[0].original_height"
               :width="eventFetched.media[0].original_width"
-              v-if="eventFetched.media[0]"
+              v-if="eventFetched.media"
               placeholder
             />
             <!-- <% else_if $Image.URL %> -->
@@ -37,7 +37,13 @@
               <!-- <% if $Dates || $Venue || $Location || $OnlineLocationUrl || $isOnline %> -->
 
               <p class="m-0">
-                Dates will go here
+                <!-- Dates will go here -->
+                Date(s): 
+                <ul>
+                  <li v-for="instance in eventFetched.event_instances" :key="instance.id">{{ instance.event_instance.start }}</li>
+                </ul>
+                <span></span>
+                <!-- <span v-if="eventFetched.event_instances.count > 1"></span> -->
                 <!-- <% if $Dates.Count> 1 %><strong>Next date:</strong>
                               <% else %><strong>Date:</strong>
                                 <% end_if %>
@@ -57,13 +63,15 @@
 
               <p>
                 <!-- <% if $isOnline %> -->
-                <strong>Location: </strong
-                ><i aria-hidden="true" class="fas fa-laptop"></i>Virtual
-                Event<br />
+                <span v-if="eventFetched.virtual">
+                <strong>Location: <i aria-hidden="true" class="fas fa-laptop"></i>Virtual
+                Event<br /></strong>
+                </span>
                 <!-- <% else %> -->
 
                 <!-- <% if $Venue.Title || $Location %> -->
-                <strong> Location: </strong>
+                <span v-if="!eventFetched.virtual">
+                <strong> Location: <span v-if="eventFetched.room_number"> {{ eventFetched.room_number }}, </span> {{ eventFetched.location_name }}</strong>
                 <span itemprop="location">
                   <!-- <% if $Location %> $Location<% if $Venue.Title %>,<% end_if %>
                                           <% end_if %>
@@ -79,6 +87,7 @@
                 </span>
                 <!-- <% end_if %>
                                     <% end_if %> -->
+                                    </span>
               </p>
               <!-- <% end_if %> -->
               <p>
@@ -337,15 +346,44 @@
               <% end_if %>  -->
       </div>
     </div>
-    <h2 class="text-center pt-4">More events</h2>
-    <MoreEvents />
+    <h2 class="text-center pt-4" @click="toggleMoreEventsList" id="more-events-heading">More events</h2>
+    <div v-if="isShowMoreEvents">
+      <MoreEvents />
+    </div>
+    <!-- <MoreEvents /> -->
   </div>
 </template>
 <script setup>
+import { ref, defineAsyncComponent, onMounted } from "vue";
 const route = useRoute();
 const eventFetched = await getEvent(route.params.id);
 
-console.log(eventFetched);
+const isShowMoreEvents = ref(false);
+const MoreEvents = defineAsyncComponent(() =>
+  import("~/components/MoreEvents.vue")
+);
+
+// onMounted(() => {
+//   let observerOptions = {
+//     threshold: 1.0,
+//   };
+
+//   let observer = new IntersectionObserver(function (entries, observer) {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         isShowMoreEvents.value = true;
+//       }
+//     });
+//   }, observerOptions);
+//   let target = document.querySelector("#more-events-heading");
+//   console.log(target);
+//   observer.observe(target);
+// });
+
+// const toggleMoreEventsList = () => {
+//   isShowMoreEvents.value = !isShowMoreEvents.value;
+// };
+//console.log(eventFetched);
 </script>
 
 <style scoped>

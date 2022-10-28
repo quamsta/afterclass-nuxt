@@ -19,10 +19,9 @@
                 :name="'featured-event-' + index"
                 class="form-select"
                 v-model="featuredEventIds[index]"
+                @change="updateHtmlGen"
               >
-                <option value="0" label="(No event)" @click="updateHtmlGen">
-                  0
-                </option>
+                <option value="0" label="(No event)">0</option>
                 <option
                   @click="updateHtmlGen($event.target.value)"
                   v-for="event in eventFeed.events"

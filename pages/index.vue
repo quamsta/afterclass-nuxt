@@ -2,21 +2,13 @@
   <div>
     <HeaderLarge />
     <div class="container-fluid">
-      <masonry-wall
-        :items="eventFeed.events"
-        :ssr-columns="1"
-        :column-width="300"
-        :gap="16"
-      >
-        <template #default="{ item, index }">
-          <EventCard :event="item.event" />
-        </template>
-      </masonry-wall>
+      <EventWall :eventFeed="eventFeed" />
     </div>
   </div>
 </template>
 <script setup>
-const eventFeed = await getEvents();
+import { ref } from "vue";
+const eventFeed = ref(await getEvents());
 </script>
 
 <style scoped>

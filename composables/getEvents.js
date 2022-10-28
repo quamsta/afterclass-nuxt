@@ -1,7 +1,42 @@
-async function getEvents() {
-  const { data: feed } = await useFetch(
-    "https://content.uiowa.edu/api/v1/views/events_api.json?display_id=threemonths&filters[interests]=284&items_per_page=100"
-  );
+const feedBase = "https://content.uiowa.edu/api/v1/views/events_api.json?";
+
+async function getEvents(startDate, endDate, venue, keyword, type, interest) {
+  var feedParams = "";
+  var afterClassInterest = 284;
+
+  if (startDate || endDate) {
+    feedParams += "display_id=events";
+  } else {
+    feedParams += "display_id=threemonths";
+  }
+
+  // Date business
+  if (startDate) {
+    feedParams += "&filters[startdate][value][date]=" + startDate;
+  }
+
+  if (endDate) {
+    feedParams += "&filters[endDate][value][date]=" + endDate;
+  }
+
+  //should look like
+  //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-28-2022&filters[enddate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100
+  //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-29-2022&filters[endDate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100
+
+  //If interest is manually set override After Class General Interest
+  if (interest) {
+    feedParams += "&filters[interests]=" + interest;
+  } else {
+    feedParams += "&filters[interests]=" + afterClassInterest;
+  }
+
+  feedParams += "&items_per_page=100";
+
+  const feedUrl = feedBase + feedParams;
+
+  console.log(feedUrl);
+
+  const { data: feed } = await useFetch(feedUrl, { key: feedUrl });
   return feed;
 }
 

@@ -3,43 +3,35 @@ export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    title: "After Class",
-    htmlAttrs: {
-      lang: "en",
+  app: {
+    // Global page headers: https://go.nuxtjs.dev/config-head
+    head: {
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [
+        {
+          charset: "utf-8",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+      ],
+      link: [
+        {
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon.ico",
+        },
+      ],
     },
-    meta: [
-      {
-        charset: "utf-8",
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
-      },
-      {
-        hid: "description",
-        name: "description",
-        content: "",
-      },
-      {
-        name: "format-detection",
-        content: "telephone=no",
-      },
-    ],
-    link: [
-      {
-        rel: "icon",
-        type: "image/x-icon",
-        href: "/favicon.ico",
-      },
-    ],
   },
   googleFonts: {
     families: {
       Roboto: {
         wght: [100, 300, 400],
-        ital: [100],
+        ital: [100, 300, 400],
       },
       "Roboto+Condensed": true,
       "Zilla+Slab": true,

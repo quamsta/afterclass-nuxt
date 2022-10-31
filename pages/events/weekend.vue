@@ -41,5 +41,4 @@ const eventFeed = ref(await getEvents(start, end));
 </script>
   
 <style scoped>
-
 </style>

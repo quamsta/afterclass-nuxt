@@ -1,19 +1,4 @@
-// async function getFeaturedEvent(id) {
-//     const { data: feed } = await useFetch(
-//         "https://content.uiowa.edu/api/v1/views/events_api.json?display_id=threemonths&filters[interests]=284&items_per_page=100"
-//     );
-//     return feed;
-// }
-
-// async function getEvent(id) {
-//     const { data: feed } = await useFetch(
-//         "https://content.uiowa.edu/api/v1/node/" + id + ".json",
-//         {
-//             key: id,
-//         }
-//     );
-//     return feed;
-// }
+import getUpcomingDates from "./getDates.js";
 
 //Gets <html> through <body>
 function getNewsletterHeaderHtml() {
@@ -1010,42 +995,45 @@ function getNewsletterHeaderTextHtml(text) {
 
 function getNewsletterFeaturedEventHtml(event) {
   const hasImage = "media" in event;
-  var html =
-    `<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageCardBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+  var html = `<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageCardBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
     <tbody class="mcnImageCardBlockOuter">
         <tr>
             <td class="mcnImageCardBlockInner" valign="top" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                 <table align="left" border="0" cellpadding="0" cellspacing="0" class="mcnImageCardBottomContent" width="100%" style="background-color: #000;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%; border: 1px solid #333">
-                    <tbody>
-                        <!-- if $Image.ThumbURL -->
-                        <tr>
+                    <tbody>`;
+
+  if (event.media) {
+    html +=
+      `                        <tr>
                             <td class="mcnImageCardBottomImageContent" align="left" valign="top" style="padding-top: 0px;padding-right: 0px;padding-bottom: 0;padding-left: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                 <a href="` +
-    event.events_site_url +
-    `" title="" class="" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+      event.events_site_url +
+      `" title="" class="" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                     <img alt="` +
-    event.title +
-    ` - Click for details on this event." src="` +
-    event.media[0].large_image +
-    ` " width="564" style="max-width: 600px;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
+      event.media[0].alt_text +
+      ` " width="564" style="max-width: 600px;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
                                 </a>
                             </td>
-                        </tr>
-                        <!-- end_if -->
+                        </tr>`;
+  }
+  html +=
+    `
                         <tr>
                             <td class="mcnTextContent" valign="top" style="padding: 9px 18px;color: #F2F2F2;font-family: Helvetica;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;" width="546">
                                 <h2 class="null" style="display: block;margin: 0;padding: 0;color: #ffffff;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;text-align: left;"><a href="` +
-    event.events_site_url +
+    getAfterClassLink(event) +
     `" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">` +
     event.title +
-    `</a></h2>
+    `</a></h2>` +
+    getDateHtml(event) +
+    `
                                     <!-- include NewsletterDateTimesVenue -->
 
                                      ` +
-    event.title +
     ` <a href="` +
-    event.events_site_url +
-    `" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">More...</a>
+    getAfterClassLink(
+      event
+    )`" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">More...</a>
                                 </div>
                                 </td>
                             </tr>
@@ -1058,7 +1046,8 @@ function getNewsletterFeaturedEventHtml(event) {
   return html;
 }
 function getNewsletterFooterTextHtml(text) {
-  var html = ` <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+  var html =
+    ` <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                     <tbody class="mcnTextBlockOuter">
                         <tr>
                             <td valign="top" class="mcnTextBlockInner" style="padding-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
@@ -1073,7 +1062,9 @@ function getNewsletterFooterTextHtml(text) {
                                     <tbody>
                                         <tr>
                                             <td valign="top" class="mcnTextContent" style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #ffffff;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
-                                                $FooterText
+                                                ` +
+    text +
+    `
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1089,6 +1080,7 @@ function getNewsletterFooterTextHtml(text) {
                         </tr>
                     </tbody>
                     </table>`;
+  return html;
 }
 
 function getNewsletterNonFeaturedEventsHtml() {}
@@ -1307,9 +1299,35 @@ function getNewsletterFooterHtml() {
   return html;
 }
 
+function getDateHtml(event) {
+  var upcomingDates = [];
+  upcomingDates = getUpcomingDates(event.event_instances);
+  console.log(upcomingDates);
+
+  //     <span class="text-uppercase">
+
+  //     <span v-if="upcomingDates.length > 0">
+  //         <font-awesome-icon icon="fa-solid fa-calendar-alt" />
+  //         {{ upcomingDates[0] }}
+  //         <span v-if="upcomingDates.length > 1 && props.showMoreDatesLink"><a href="#all-dates">More dates</a></span>
+  //     </span>
+  //     <span v-if="pastDates">
+
+  //         <font-awesome-icon icon="fa-solid fa-calendar-alt" />
+  //         {{ pastDates[0] }}
+
+  //     </span>
+  // </span>
+}
+
+function getAfterClassLink(event) {
+  return `https://afterclass.uiowa.edu/events/` + event.id;
+}
+
 export {
   getNewsletterHeaderHtml,
   getNewsletterHeaderTextHtml,
+  getNewsletterFooterTextHtml,
   getNewsletterFeaturedEventHtml,
   getNewsletterNonFeaturedEventsHtml,
   getNewsletterFooterHtml,

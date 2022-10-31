@@ -13,16 +13,12 @@ function getUpcomingDates(eventInstances) {
     var parsedDate = parseISO(element.event_instance.start);
 
     if (!isPast(parsedDate)) {
-      var formattedDate = dateFormat(
-        parsedDate,
-        preferredLongDateFormat
-      );
+      var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
       dates.push(formattedDate);
     }
   });
 
   return dates;
-
 }
 
 function getPastDates(eventInstances) {
@@ -35,16 +31,12 @@ function getPastDates(eventInstances) {
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
     if (isPast(parsedDate)) {
-      var formattedDate = dateFormat(
-        parsedDate,
-        preferredLongDateFormat
-      );
+      var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
       dates.push(formattedDate);
     }
   });
 
   return dates;
-
 }
 
 function getAllDates(eventInstances) {
@@ -56,19 +48,21 @@ function getAllDates(eventInstances) {
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
 
-    var formattedDate = dateFormat(
-      parsedDate,
-      preferredLongDateFormat
-    );
+    var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
 
     dates.push(formattedDate);
-
   });
   return dates;
 }
 
-function formatDate(date) { }
+function formatDate(date) {}
 
-function formatDateSmall(date) { }
+function formatDateSmall(date) {}
 
-export { getUpcomingDates, getPastDates, getAllDates, formatDate, formatDateSmall };
+export {
+  getUpcomingDates,
+  getPastDates,
+  getAllDates,
+  formatDate,
+  formatDateSmall,
+};

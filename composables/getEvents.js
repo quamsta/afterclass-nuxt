@@ -19,6 +19,18 @@ async function getEvents(startDate, endDate, venue, keyword, type, interest) {
     feedParams += "&filters[endDate][value][date]=" + endDate;
   }
 
+  if (venue) {
+    feedParams += "&filters[place]=" + venue;
+  }
+
+  if (keyword) {
+    feedParams += "&filters[keywords]=" + keyword;
+  }
+
+  if (type) {
+    feedParams += "&filters[types]=" + type;
+  }
+
   //should look like
   //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-28-2022&filters[enddate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100
   //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-29-2022&filters[endDate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100

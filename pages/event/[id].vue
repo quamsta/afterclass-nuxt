@@ -2,63 +2,116 @@
   <div>
     <Title>{{ eventFetched.title }}</Title>
     <Meta name="title" :content="eventFetched.title" />
-    <Meta name="description" :content="eventFetched.description_text" v-if="eventFetched.description_text" />
+    <Meta
+      name="description"
+      :content="eventFetched.description_text"
+      v-if="eventFetched.description_text"
+    />
     <Meta name="og:title" :content="eventFetched.title" />
-    <Meta name="og:description" :content="eventFetched.description_text" v-if="eventFetched.description_text" />
-    <Meta name="og:image:url" :content="eventFetched.media[0].original_image" v-if="eventFetched.media" />
-    <Meta name="og:image:width" :content="eventFetched.media[0].original_width" v-if="eventFetched.media" />
-    <Meta name="og:image:height" :content="eventFetched.media[0].original_height" v-if="eventFetched.media" />
-    <Meta name="og:image:alt" :content="eventFetched.media[0].alt_text" v-if="eventFetched.media" />
+    <Meta
+      name="og:description"
+      :content="eventFetched.description_text"
+      v-if="eventFetched.description_text"
+    />
+    <Meta
+      name="og:image:url"
+      :content="eventFetched.media[0].original_image"
+      v-if="eventFetched.media"
+    />
+    <Meta
+      name="og:image:width"
+      :content="eventFetched.media[0].original_width"
+      v-if="eventFetched.media"
+    />
+    <Meta
+      name="og:image:height"
+      :content="eventFetched.media[0].original_height"
+      v-if="eventFetched.media"
+    />
+    <Meta
+      name="og:image:alt"
+      :content="eventFetched.media[0].alt_text"
+      v-if="eventFetched.media"
+    />
     <HeaderSmall />
 
     <div class="container content-container" role="main" id="content">
-
       <div class="row d-flex pt-4 pt-xl-5 justify-content-center">
         <div class="col-lg-7 col-xl-8">
           <article class="position-relative">
+            <img
+              class="card__banner-img"
+              alt="Late Night Programs Flag"
+              role="presentation"
+              src="~/assets/images/latenightbanner.png"
+              v-if="isLateNight() == true"
+            />
 
-
-            <img class="card__banner-img" alt="Late Night Programs Flag" role="presentation"
-              src="~/assets/images/latenightbanner.png" v-if="isLateNight() == true" />
-
-            <img class="d-block w-100 mb-2 event-image" :src="eventFetched.media[0].large_image"
-              :alt="eventFetched.media[0].alt_text" :height="eventFetched.media[0].original_height"
-              :width="eventFetched.media[0].original_width" v-if="eventFetched.media" placeholder />
+            <img
+              class="d-block w-100 mb-2 event-image"
+              :src="eventFetched.media[0].large_image"
+              :alt="eventFetched.media[0].alt_text"
+              :height="eventFetched.media[0].original_height"
+              :width="eventFetched.media[0].original_width"
+              v-if="eventFetched.media"
+              placeholder
+            />
 
             <h1>{{ eventFetched.title }}</h1>
             <div class="event-details">
               <p>
-                <EventDate :eventInstances="eventFetched.event_instances" v-if="eventFetched.event_instances"
-                  :showMoreDatesLink="true" />
+                <EventDate
+                  :eventInstances="eventFetched.event_instances"
+                  v-if="eventFetched.event_instances"
+                  :showMoreDatesLink="true"
+                />
                 <br />
                 <EventLocation :event="eventFetched" />
               </p>
               <p>
-                <!-- <% if $OnlineLocationUrl || $MoreInfoLink %> -->
-                <!-- 
-                                <% if $OnlineLocationUrl %>
-                                  <% if $OnlineLocationType=="Zoom" %> -->
-                <!-- <a class="btn btn-primary btn-zoom mb-1" :href="{{ }}" rel="noopener" target="_blank">Zoom
-                  link <i aria-hidden="true" class="fas fa-video"></i></a> -->
-                <!-- <% else %> -->
-                <a class="btn btn-outline-white mb-1 mx-1" v-if="eventFetched.virtual_url"
-                  :href="eventFetched.virtual_url" rel="noopener" target="_blank">Virtual event
-                  link
-                  <font-awesome-icon icon="fas fa-laptop-house"></font-awesome-icon>
+                <a
+                  class="btn btn-outline-white mb-1 mx-1"
+                  v-if="eventFetched.virtual_url"
+                  :href="eventFetched.virtual_url"
+                  rel="noopener"
+                  target="_blank"
+                  >Virtual event link
+                  <font-awesome-icon
+                    icon="fas fa-laptop-house"
+                  ></font-awesome-icon>
                 </a>
 
-                <a :href="eventFetched.url" v-if="eventFetched.url" class="btn btn-outline-white mb-1 mx-1"
-                  target="_blank">Event
-                  website
-                  <font-awesome-icon icon="fas fa-external-link-alt"></font-awesome-icon>
+                <a
+                  :href="eventFetched.url"
+                  v-if="eventFetched.url"
+                  class="btn btn-outline-white mb-1 mx-1"
+                  target="_blank"
+                  >Event website
+                  <font-awesome-icon
+                    icon="fas fa-external-link-alt"
+                  ></font-awesome-icon>
                 </a>
               </p>
             </div>
-            <div class="content" v-html="eventFetched.description" v-if="eventFetched.description"></div>
-            <div class="event-details" id="all-dates" v-if="allDates.length > 1">
+            <div
+              class="content"
+              v-html="eventFetched.description"
+              v-if="eventFetched.description"
+            ></div>
+            <div
+              class="event-details"
+              id="all-dates"
+              v-if="allDates.length > 1"
+            >
               <p>
-                <button class="h2 bg-black border-0 text-white" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseDates" aria-expanded="false" aria-controls="collapseDates">
+                <button
+                  class="h2 bg-black p-2 border border-white text-white"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseDates"
+                  aria-expanded="false"
+                  aria-controls="collapseDates"
+                >
                   All dates for this event
                   <font-awesome-icon icon="fa-solid fa-plus" />
                 </button>
@@ -66,91 +119,98 @@
               <div class="collapse" id="collapseDates">
                 <div class="card card-body">
                   <ul>
-                    <li v-for="date in allDates" :key="date.id"> {{ date }}</li>
+                    <li v-for="date in allDates" :key="date.id">{{ date }}</li>
                   </ul>
                 </div>
               </div>
 
-
-              <!-- <p>
-                <button class="btn btn-outline-white br-0 btn-secondary" type="button" data-toggle="collapse"
-                  data-target="#moreDates" aria-expanded="false" aria-controls="moreDates">
-                  More Dates
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
-                    viewBox="0 0 16 16">
-                    <path
-                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                  </svg>
-                </button>
-              </p>
-              <div class="collapse b-0" id="moreDates">
-                <div class="card card-body">
-                  <ul>
-       
-                  </ul>
-                </div>
-              </div> -->
-
               <p v-if="eventFetched.keywords">
-                <EventFilterList type="tags" :filters="eventFetched.keywords" />
+                <EventFilterList type="tag" :filters="eventFetched.keywords" />
               </p>
 
               <p v-if="eventFetched.filters.event_types">
-                <EventFilterList type="types" :filters="eventFetched.filters.event_types" />
+                <EventFilterList
+                  type="type"
+                  :filters="eventFetched.filters.event_types"
+                />
               </p>
             </div>
             <p v-if="eventFetched.events_site_url">
-              <a :href="eventFetched.events_site_url" class="btn btn-outline-white mb-2" target="_blank">View on the UI
-                Events
-                Calendar
-                <font-awesome-icon icon="fas fa-external-link-alt"></font-awesome-icon>
+              <a
+                :href="eventFetched.events_site_url"
+                class="btn btn-outline-white mb-2"
+                target="_blank"
+                >View on the UI Events Calendar
+                <font-awesome-icon
+                  icon="fas fa-external-link-alt"
+                ></font-awesome-icon>
               </a>
             </p>
 
-            <!-- <% if $ContactEmail %> -->
             <div v-if="eventFetched.contact_email">
               <hr />
               <p>
                 Questions about this event?
-                <a :href="'mailto:' + eventFetched.contact_email" class="report-problem-link">Contact {{
-                    eventFetched.contact_name
-                }}.</a>
+                <a
+                  :href="'mailto:' + eventFetched.contact_email"
+                  class="report-problem-link"
+                  >Contact {{ eventFetched.contact_name }}.</a
+                >
               </p>
             </div>
-            <!-- <% if $IsLateNight %> -->
+
             <div class="late-night-feature" v-if="isLateNight() == true">
               <p>
-                <img class="late-night-feature__flag" src="~/assets/images/latenightbanner.png"
-                  alt="Late Night Programs Flag" role="presentation" />This event is part of Late Night Programs,
-                <a href="events/interest/7491/">see more events tagged as Late Night Programs.</a>
+                <img
+                  class="late-night-feature__flag"
+                  src="~/assets/images/latenightbanner.png"
+                  alt="Late Night Programs Flag"
+                  role="presentation"
+                />This event is part of Late Night Programs,
+                <a href="events/interest/7491/"
+                  >see more events tagged as Late Night Programs.</a
+                >
               </p>
               <p class="late-night-feature__smalltext">
-                <a href="https://getinvolved.uiowa.edu/campus-programs/latenight" target="_blank">Learn more about Late
-                  Night Programs</a>
+                <a
+                  href="https://getinvolved.uiowa.edu/campus-programs/latenight"
+                  target="_blank"
+                  >Learn more about Late Night Programs</a
+                >
               </p>
             </div>
             <p>
-              <i>Individuals with disabilities are encouraged to attend all
-                University of Iowa–sponsored events. If you are a person with a disability who requires a reasonable
-                accommodation in order to participate in this program, please contact {{ eventFetched.contact_name }} in
-                advance at <a :href="'tel:' + eventFetched.contact_phone">{{ eventFetched.contact_phone }}</a> or <a
-                  :href="'mailto:' + eventFetched.contact_email">{{
-    eventFetched.contact_email
-                  }}.</a>.
+              <i
+                >Individuals with disabilities are encouraged to attend all
+                University of Iowa–sponsored events. If you are a person with a
+                disability who requires a reasonable accommodation in order to
+                participate in this program, please contact
+                {{ eventFetched.contact_name }} in advance at
+                <a :href="'tel:' + eventFetched.contact_phone">{{
+                  eventFetched.contact_phone
+                }}</a>
+                or
+                <a :href="'mailto:' + eventFetched.contact_email"
+                  >{{ eventFetched.contact_email }}.</a
+                >.
               </i>
             </p>
           </article>
         </div>
       </div>
     </div>
-    <!--
-    <h2 class="text-center pt-4" @click="toggleMoreEventsList" id="more-events-heading">
+
+    <!-- <h2
+      class="text-center pt-4"
+      @click="toggleMoreEventsList"
+      id="more-events-heading"
+    >
       More events
     </h2>
+
     <div v-if="isShowMoreEvents">
       <MoreEvents />
-    </div>
-     <MoreEvents /> -->
+    </div> -->
   </div>
 </template>
 <script setup>
@@ -184,8 +244,9 @@ function isLateNight() {
 }
 
 // onMounted(() => {
+//   console.log("mounted more events");
 //   let observerOptions = {
-//     threshold: 1.0,
+//     threshold: 0.1,
 //   };
 
 //   let observer = new IntersectionObserver(function (entries, observer) {
@@ -196,8 +257,12 @@ function isLateNight() {
 //     });
 //   }, observerOptions);
 //   let target = document.querySelector("#more-events-heading");
-//   console.log(target);
+//   console.log("target : " + target);
 //   observer.observe(target);
+// });
+
+// onUnmounted(() => {
+//   console.log("mounted more events");
 // });
 
 // const toggleMoreEventsList = () => {
@@ -207,5 +272,4 @@ function isLateNight() {
 </script>
 
 <style scoped>
-
 </style>

@@ -42,7 +42,7 @@ async function getEvents(startDate, endDate, venue, keyword, type, interest) {
 
   const feedUrl = feedBase + feedParams;
 
-  console.log(feedUrl);
+  //console.log(feedUrl);
 
   const { data: feed } = await useFetch(feedUrl, { key: feedUrl });
   return feed;

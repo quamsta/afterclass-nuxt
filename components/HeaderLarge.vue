@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="header__container">
-      <div class="">
+      <div class="container-fluid">
         <div class="row d-none d-lg-block">
-          <div class="col-lg-12 content-container title__container">
+          <div class="col-lg-12">
             <div class="header-graphic">
               <NuxtLink to="/" class="d-block">
                 <img

@@ -1025,6 +1025,8 @@ function getNewsletterFeaturedEventHtml(event) {
     event.title +
     `</a></h2>` +
     getDateHtml(event) +
+    `<br />` +
+    getLocationHtml(event) +
     ` <a href="` +
     getAfterClassLink(event) +
     `" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">More...</a>
@@ -1104,6 +1106,8 @@ function getNewsletterNonfeaturedEventHtml(event) {
     `</a></h2>
                                                                                 ` +
     getDateHtml(event) +
+    `<br />` +
+    getLocationHtml(event) +
     `
 
                                                                                  <a href="` +
@@ -1355,6 +1359,22 @@ function getDateHtml(event) {
   } else {
     return "No upcoming dates.";
   }
+}
+
+function getLocationHtml(event) {
+  var location = "";
+
+  if (event.virtual) {
+    location = "Virtual Event";
+  } else {
+    if (event.room_number) {
+      location = event.room_number + ", ";
+    }
+    if (event.location_name) {
+      location += event.location_name;
+    }
+  }
+  return location;
 }
 
 export {

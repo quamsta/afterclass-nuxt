@@ -18,5 +18,16 @@
 @import "~/node_modules/@fortawesome/fontawesome-svg-core/styles.css";
 </style>
 <script setup>
-// import { UidsBrandBar } from "uids";
+// import { UidsBrandBar } from "uids";<script setup>
+useHead({
+  // as a string,   
+  // where `%s` is replaced with the title    
+  // titleTemplate: '%s - After Class | The University of Iowa'
+  // ... or as a function
+  titleTemplate: (title) => {
+    return title
+      ? `${title} - After Class | The University of Iowa`
+      : 'After Class | The University of Iowa'
+  }
+})
 </script>

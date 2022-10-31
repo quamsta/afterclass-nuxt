@@ -12,4 +12,5 @@ const eventFeed = ref(await getEvents());
 </script>
 
 <style scoped>
+
 </style>

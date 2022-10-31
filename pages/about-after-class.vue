@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Title>About After Class</Title>
         <HeaderSmall />
 
         <div class="container">

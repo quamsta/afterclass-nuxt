@@ -1,28 +1,74 @@
 import { isPast, parseISO, format as dateFormat } from "date-fns";
 
-function getUpcomingDates(event, format) {
+const preferredLongDateFormat = "EEEE, MMMM d, h:mm aaaa";
+
+function getUpcomingDates(eventInstances) {
   var dates = [];
 
-  event.value.event_instances.forEach((element, index) => {
+  if (!eventInstances.length) {
+    return false;
+  }
+
+  eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
 
     if (!isPast(parsedDate)) {
       var formattedDate = dateFormat(
         parsedDate,
-        "EEEE, MMMM d, yyyy h:mm aaaa"
+        preferredLongDateFormat
       );
-      //console.log(formattedDate);
       dates.push(formattedDate);
     }
   });
 
   return dates;
 
-  //<li v-for="instance in eventFetched.event_instances" :key="instance.id">{{ instance.event_instance.start }}</li>
 }
 
-function formatDate(date) {}
+function getPastDates(eventInstances) {
+  var dates = [];
 
-function formatDateSmall(date) {}
+  if (!eventInstances.length) {
+    return false;
+  }
 
-export { getUpcomingDates, formatDate, formatDateSmall };
+  eventInstances.forEach((element, index) => {
+    var parsedDate = parseISO(element.event_instance.start);
+    if (isPast(parsedDate)) {
+      var formattedDate = dateFormat(
+        parsedDate,
+        preferredLongDateFormat
+      );
+      dates.push(formattedDate);
+    }
+  });
+
+  return dates;
+
+}
+
+function getAllDates(eventInstances) {
+  var dates = [];
+  if (!eventInstances.length) {
+    return false;
+  }
+
+  eventInstances.forEach((element, index) => {
+    var parsedDate = parseISO(element.event_instance.start);
+
+    var formattedDate = dateFormat(
+      parsedDate,
+      preferredLongDateFormat
+    );
+
+    dates.push(formattedDate);
+
+  });
+  return dates;
+}
+
+function formatDate(date) { }
+
+function formatDateSmall(date) { }
+
+export { getUpcomingDates, getPastDates, getAllDates, formatDate, formatDateSmall };

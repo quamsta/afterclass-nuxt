@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Title>Newsletter Creator</Title>
     <HeaderSmall />
     <div class="container">
       <div class="row">
@@ -11,24 +12,12 @@
         <div class="col-lg-6">
           <form class="form-floating">
             <div v-for="index in 8" :key="index">
-              <label :for="'featured-event-' + index"
-                >Featured Event {{ index }}:</label
-              >
-              <select
-                :id="'featured-event-' + index"
-                :name="'featured-event-' + index"
-                class="form-select"
-                v-model="featuredEventIds[index]"
-                @change="updateHtmlGen"
-              >
+              <label :for="'featured-event-' + index">Featured Event {{ index }}:</label>
+              <select :id="'featured-event-' + index" :name="'featured-event-' + index" class="form-select"
+                v-model="featuredEventIds[index]" @change="updateHtmlGen">
                 <option value="0" label="(No event)">0</option>
-                <option
-                  @click="updateHtmlGen($event.target.value)"
-                  v-for="event in eventFeed.events"
-                  :key="event.event.id"
-                  :value="event.event.id"
-                  :label="event.event.title"
-                >
+                <option @click="updateHtmlGen($event.target.value)" v-for="event in eventFeed.events"
+                  :key="event.event.id" :value="event.event.id" :label="event.event.title">
                   {{ event.event.id }}
                 </option>
                 <!-- <EventCard v-for="event in eventFeed.events" :key="event.id" :event="event" /> -->
@@ -36,15 +25,8 @@
             </div>
           </form>
           <label for="outputHTML">Copy/Paste HTML:</label>
-          <textarea
-            readonly
-            rows="40"
-            cols="50"
-            id="outputHTML"
-            class="form-control output-html"
-            @click="$event.target.select()"
-            v-model="htmlGen"
-          >
+          <textarea readonly rows="40" cols="50" id="outputHTML" class="form-control output-html"
+            @click="$event.target.select()" v-model="htmlGen">
           </textarea>
         </div>
         <div class="col-lg-6">

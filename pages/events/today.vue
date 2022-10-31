@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Title>Today</Title>
     <HeaderSmall />
     <div class="container-fluid">
       <h1 class="filter-header">Today:</h1>
@@ -21,4 +22,5 @@ const eventFeed = ref(await getEvents(start, end));
 </script>
   
 <style scoped>
+
 </style>

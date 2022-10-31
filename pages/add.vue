@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Title>Add Your Event</Title>
         <HeaderSmall />
 
         <div class="container">

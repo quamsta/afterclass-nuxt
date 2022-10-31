@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-if="props.event.location_name || props.event.virtual">
     <font-awesome-icon icon="fa-solid fa-map-pin" />&nbsp;
     <!-- <% if $isOnline %> -->
     <span v-if="props.event.virtual">Virtual Event </span>

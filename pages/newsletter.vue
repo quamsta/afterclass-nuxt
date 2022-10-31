@@ -43,6 +43,29 @@
                 <!-- <EventCard v-for="event in eventFeed.events" :key="event.id" :event="event" /> -->
               </select>
             </div>
+            <div v-for="index in 8" :key="index">
+              <label :for="'nonfeatured-event-' + index"
+                >Nonfeatured Event {{ index }}:</label
+              >
+              <select
+                :id="'nonfeatured-event-' + index"
+                :name="'nonfeatured-event-' + index"
+                class="form-select form-select-sm"
+                v-model="nonfeaturedEventIds[index]"
+                @change="updateHtmlGen"
+              >
+                <option value="0" label="(No event)">0</option>
+                <option
+                  @click="updateHtmlGen($event.target.value)"
+                  v-for="event in eventFeed.events"
+                  :key="event.event.id"
+                  :value="event.event.id"
+                  :label="event.event.title"
+                >
+                  {{ event.event.id }}
+                </option>
+              </select>
+            </div>
             <label for="footer-text" class="d-block">Footer Text</label>
             <textarea
               id="footer-text"
@@ -84,12 +107,21 @@ const htmlGen = ref("");
 const headerText = ref("");
 const footerText = ref("");
 const featuredEventIds = ref([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+const nonfeaturedEventIds = ref([0, 0, 0, 0, 0, 0, 0, 0, 0]);
 
 // Run this initially to get an empty template to preview:
-updateHtmlGen();
+onMounted(() => {
+  updateHtmlGen();
+});
+
+const toggleMoreEventsList = () => {
+  isShowMoreEvents.value = !isShowMoreEvents.value;
+};
 
 function updateHtmlGen() {
   var featuredEventArray = [];
+  var nonfeaturedEventArray = [];
+
   featuredEventIds.value.forEach(function (element, index) {
     if (element == 0) {
       featuredEventArray[index] = null;
@@ -98,10 +130,18 @@ function updateHtmlGen() {
     }
   });
 
-  htmlGen.value = getHtmlGen(featuredEventArray);
+  nonfeaturedEventIds.value.forEach(function (element, index) {
+    if (element == 0) {
+      nonfeaturedEventArray[index] = null;
+    } else {
+      nonfeaturedEventArray[index] = getEventFromFeed(eventFeed, element);
+    }
+  });
+
+  htmlGen.value = getHtmlGen(featuredEventArray, nonfeaturedEventArray);
 }
 
-function getHtmlGen(featuredEventArray, nonFeaturedEventArray) {
+function getHtmlGen(featuredEventArray, nonfeaturedEventArray) {
   var htmlGen = getNewsletterHeaderHtml();
 
   htmlGen += getNewsletterHeaderTextHtml(headerText.value);
@@ -109,6 +149,12 @@ function getHtmlGen(featuredEventArray, nonFeaturedEventArray) {
   featuredEventArray.forEach(function (element, index) {
     if (element != null) {
       htmlGen += getNewsletterFeaturedEventHtml(element.event);
+    }
+  });
+
+  nonfeaturedEventArray.forEach(function (element, index) {
+    if (element != null) {
+      htmlGen += getNewsletterNonfeaturedEventHtml(element.event);
     }
   });
 

@@ -31,10 +31,6 @@ async function getEvents(startDate, endDate, venue, keyword, type, interest) {
     feedParams += "&filters[types]=" + type;
   }
 
-  //should look like
-  //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-28-2022&filters[enddate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100
-  //https://content.uiowa.edu/api/v1/views/events_api.json?display_id=events&filters[startdate][value][date]=10-29-2022&filters[endDate][value][date]=10-30-2022&filters[interests]=284&items_per_page=100
-
   //If interest is manually set override After Class General Interest
   if (interest) {
     feedParams += "&filters[interests]=" + interest;
@@ -46,7 +42,7 @@ async function getEvents(startDate, endDate, venue, keyword, type, interest) {
 
   const feedUrl = feedBase + feedParams;
 
-  console.log(feedUrl);
+  //console.log(feedUrl);
 
   const { data: feed } = await useFetch(feedUrl, { key: feedUrl });
   return feed;

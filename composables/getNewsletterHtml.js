@@ -1,6 +1,4 @@
-import getUpcomingDates from "./getDates.js";
-
-//Gets <html> through <body>
+//Gets <html> through first <td>
 function getNewsletterHeaderHtml() {
   var html = `<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -994,7 +992,6 @@ function getNewsletterHeaderTextHtml(text) {
 }
 
 function getNewsletterFeaturedEventHtml(event) {
-  const hasImage = "media" in event;
   var html = `<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageCardBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
     <tbody class="mcnImageCardBlockOuter">
         <tr>
@@ -1007,10 +1004,12 @@ function getNewsletterFeaturedEventHtml(event) {
       `                        <tr>
                             <td class="mcnImageCardBottomImageContent" align="left" valign="top" style="padding-top: 0px;padding-right: 0px;padding-bottom: 0;padding-left: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                 <a href="` +
-      event.events_site_url +
+      getAfterClassLink(event) +
       `" title="" class="" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
                                     <img alt="` +
       event.media[0].alt_text +
+      ` " src="` +
+      event.media[0].large_image +
       ` " width="564" style="max-width: 600px;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
                                 </a>
                             </td>
@@ -1026,15 +1025,10 @@ function getNewsletterFeaturedEventHtml(event) {
     event.title +
     `</a></h2>` +
     getDateHtml(event) +
-    `
-                                    <!-- include NewsletterDateTimesVenue -->
-
-                                     ` +
     ` <a href="` +
-    getAfterClassLink(
-      event
-    )`" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">More...</a>
-                                </div>
+    getAfterClassLink(event) +
+    `" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #FFCD00;font-weight: normal;text-decoration: underline;">More...</a>
+                               
                                 </td>
                             </tr>
                         </tbody>
@@ -1083,9 +1077,62 @@ function getNewsletterFooterTextHtml(text) {
   return html;
 }
 
-function getNewsletterNonFeaturedEventsHtml() {}
+function getNewsletterNonfeaturedEventHtml(event) {
+  var html =
+    `<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnBoxedTextBlock" style="min-width:100%;">
+                                    <!--[if gte mso 9]>
+                                        <table align="center" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                        <![endif]-->
+                                    <tbody class="mcnBoxedTextBlockOuter">
+                                        <tr>
+                                            <td valign="top" class="mcnBoxedTextBlockInner">
+                                                <!--[if gte mso 9]>
+                                                    <td align="center" valign="top" ">
+                                                    <![endif]-->
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;" class="mcnBoxedTextContentContainer">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="padding-top:9px; padding-left:18px; padding-bottom:9px; padding-right:18px;">
+                                                                <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #000;">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td valign="top" class="mcnTextContent" style="padding: 18px;color: #F2F2F2;font-family: Helvetica;font-size: 14px;font-weight: normal;text-align: left;">
+                                                                                <h2 class="null"><a href="` +
+    getAfterClassLink(event) +
+    `" target="_blank">` +
+    event.title +
+    `</a></h2>
+                                                                                ` +
+    getDateHtml(event) +
+    `
+
+                                                                                 <a href="` +
+    getAfterClassLink(event) +
+    `" target="_blank">More...</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <!--[if gte mso 9]>
+                                                    </td>
+                                                    <![endif]-->
+                                                <!--[if gte mso 9]>
+                                                    </tr>
+                                                    </table>
+                                                    <![endif]-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>`;
+
+  return html;
+}
 function getNewsletterFooterHtml() {
-  var html = `/td>
+  var html = `</td>
                         </tr>
                         <tr>
                             <td valign="top" id="templateFooter">
@@ -1302,26 +1349,12 @@ function getNewsletterFooterHtml() {
 function getDateHtml(event) {
   var upcomingDates = [];
   upcomingDates = getUpcomingDates(event.event_instances);
-  console.log(upcomingDates);
 
-  //     <span class="text-uppercase">
-
-  //     <span v-if="upcomingDates.length > 0">
-  //         <font-awesome-icon icon="fa-solid fa-calendar-alt" />
-  //         {{ upcomingDates[0] }}
-  //         <span v-if="upcomingDates.length > 1 && props.showMoreDatesLink"><a href="#all-dates">More dates</a></span>
-  //     </span>
-  //     <span v-if="pastDates">
-
-  //         <font-awesome-icon icon="fa-solid fa-calendar-alt" />
-  //         {{ pastDates[0] }}
-
-  //     </span>
-  // </span>
-}
-
-function getAfterClassLink(event) {
-  return `https://afterclass.uiowa.edu/events/` + event.id;
+  if (upcomingDates.length > 0) {
+    return upcomingDates[0];
+  } else {
+    return "No upcoming dates.";
+  }
 }
 
 export {
@@ -1329,6 +1362,6 @@ export {
   getNewsletterHeaderTextHtml,
   getNewsletterFooterTextHtml,
   getNewsletterFeaturedEventHtml,
-  getNewsletterNonFeaturedEventsHtml,
+  getNewsletterNonfeaturedEventHtml,
   getNewsletterFooterHtml,
 };

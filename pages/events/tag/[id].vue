@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Title>{{ interest.name }}</Title>
+    <Title>{{ tag.name }}</Title>
     <HeaderSmall />
     <div class="container-fluid">
-      <h1 class="filter-header">Events tagged as "{{ route.params.id }}":</h1>
+      <h1 class="filter-header">Events tagged as "{{ tag.name }}":</h1>
       <EventWall :eventFeed="eventFeed" />
     </div>
   </div>
@@ -11,7 +11,8 @@
 <script setup>
 import { ref } from "vue";
 const route = useRoute();
-//const tag = await getFilter("keyword", route.params.id);
+const tag = await getFilter("keyword", route.params.id);
+// console.log(tag);
 const eventFeed = ref(
   await getEvents(null, null, null, route.params.id, null, null)
 );

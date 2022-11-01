@@ -51,16 +51,6 @@
                   >Division of Student Life</a
                 >.
               </p>
-              <p>
-                Individuals with disabilities are encouraged to attend all
-                University of Iowa–sponsored events. If you are a person with a
-                disability who requires a reasonable accommodation in order to
-                participate in this program, please contact the Office of the
-                Vice President for Student Life in advance at 319-335-3557 or
-                <a href="mailto:vp-student-life@uiowa.edu"
-                  >vp-student-life@uiowa.edu</a
-                >.
-              </p>
             </div>
 
             <div
@@ -69,14 +59,8 @@
               itemtype="http://schema.org/PostalAddress"
             >
               <p>
-                After Class
-
-                <br />
-
-                <br />
-                <a href="tel:319-335-3557">
-                  <i class="fas fa-phone mr-2"></i>319-335-3557
-                </a>
+                <font-awesome-icon icon="fas fa-phone mx-2" />
+                <a href="tel:319-335-3557"> 319-335-3557 </a>
               </p>
             </div>
 
@@ -122,30 +106,30 @@
                   <h2 class="sr-only">Footer Navigation</h2>
                   <ul class="list-unstyled row">
                     <li class="col-6">
-                      <a href="/events/" class="text-light d-block py-2"
-                        >Events</a
+                      <NuxtLink href="/" class="text-light d-block py-2"
+                        >Events</NuxtLink
                       >
                     </li>
 
                     <li class="col-6">
-                      <a href="/add/" class="text-light d-block py-2"
-                        >Add your event</a
+                      <NuxtLink href="/add/" class="text-light d-block py-2"
+                        >Add your event</NuxtLink
                       >
                     </li>
 
                     <li class="col-6">
-                      <a
+                      <NuxtLink
                         href="/about-after-class/"
                         class="text-light d-block py-2"
-                        >About</a
+                        >About</NuxtLink
                       >
                     </li>
 
                     <li class="col-6">
-                      <a
+                      <NuxtLink
                         href="https://md.studentlife.uiowa.edu/clients/event-promotion-best-practices"
                         class="text-light d-block py-2"
-                        >Promote</a
+                        >Promote</NuxtLink
                       >
                     </li>
                   </ul>
@@ -154,8 +138,8 @@
 
               <div class="col-lg-4">
                 <div class="footer__buttons py-2">
-                  <a
-                    href="https://afterclass.uiowa.edu/events/show/weekend"
+                  <NuxtLink
+                    href="/events/weekend"
                     class="
                       btn
                       d-block d-sm-inline-block d-lg-block
@@ -163,9 +147,8 @@
                       mr-1
                       mb-1
                     "
-                    target="_blank"
-                    >This Weekend <i class="fas fa-arrow-right"></i
-                  ></a>
+                    >This Weekend <font-awesome-icon icon="fas fa-arrow-right"
+                  /></NuxtLink>
                 </div>
               </div>
             </div>
@@ -183,21 +166,16 @@
           <div class="footer__copyright py-2 col">
             <p class="mb-0 small">
               © 2022
-              <a href="http://www.uiowa.edu/" target="_blank"
-                >The University of Iowa</a
-              >. All Rights Reserved.
+              <a href="http://www.uiowa.edu/">The University of Iowa</a>. All
+              Rights Reserved.
               <a
                 href="http://www.uiowa.edu/homepage/online-privacy-information"
                 class="footer__bar-link"
-                target="_blank"
-                rel="noopener"
                 >Privacy Information</a
               >
               <a
                 href="https://opsmanual.uiowa.edu/community-policies/nondiscrimination-statement"
                 class="footer__bar-link"
-                target="_blank"
-                rel="noopener"
                 >Nondiscrimination Statement</a
               >
               <a
@@ -208,16 +186,11 @@
               >
               <a
                 href="https://nativeamericancouncil.org.uiowa.edu/"
-                target="_blank"
-                rel="noopener"
                 class="footer__bar-link"
                 >UI Indigenous Land Acknowledgement</a
               >
               Created by
-              <a
-                href="https://slc.studentlife.uiowa.edu/"
-                target="_blank"
-                rel="noopener"
+              <a href="https://slc.studentlife.uiowa.edu/"
                 >Student Life Communications</a
               >
             </p>

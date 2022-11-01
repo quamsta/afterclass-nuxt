@@ -10,9 +10,7 @@
 
     <!-- <% if $Venue.Title || $Location %> -->
     <span itemprop="location" v-if="!props.event.virtual">
-      <span v-if="props.event.room_number">
-        {{ props.event.room_number }},
-      </span>
+      <span v-if="props.event.room_number"> {{ roomNumberParsed }}, </span>
       <NuxtLink
         v-if="props.event.location_id"
         :href="'/events/venue/' + props.event.location_id"
@@ -26,4 +24,14 @@
 const props = defineProps({
   event: Object,
 });
+
+var roomNumberParsed = "";
+
+if (props.event.room_number) {
+  if (isNaN(props.event.room_number)) {
+    roomNumberParsed = props.event.room_number;
+  } else {
+    roomNumberParsed = "Room " + props.event.room_number;
+  }
+}
 </script>

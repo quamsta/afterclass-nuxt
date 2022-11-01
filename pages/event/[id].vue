@@ -93,6 +93,26 @@
                 </a>
               </p>
             </div>
+            <div class="late-night-feature" v-if="isLateNight() == true">
+              <p>
+                <img
+                  class="late-night-feature__flag"
+                  src="~/assets/images/latenightbanner.png"
+                  alt="Late Night Programs Flag"
+                  role="presentation"
+                />This event is part of Late Night Programs,
+                <NuxtLink href="/events/interest/7491/"
+                  >see more events tagged as Late Night Programs.</NuxtLink
+                >
+              </p>
+              <p class="late-night-feature__smalltext">
+                <a
+                  href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs"
+                  target="_blank"
+                  >Learn more about Late Night Programs</a
+                >
+              </p>
+            </div>
             <div
               class="content"
               v-html="eventFetched.description"
@@ -159,26 +179,6 @@
               </p>
             </div>
 
-            <div class="late-night-feature" v-if="isLateNight() == true">
-              <p>
-                <img
-                  class="late-night-feature__flag"
-                  src="~/assets/images/latenightbanner.png"
-                  alt="Late Night Programs Flag"
-                  role="presentation"
-                />This event is part of Late Night Programs,
-                <a href="events/interest/7491/"
-                  >see more events tagged as Late Night Programs.</a
-                >
-              </p>
-              <p class="late-night-feature__smalltext">
-                <a
-                  href="https://getinvolved.uiowa.edu/campus-programs/latenight"
-                  target="_blank"
-                  >Learn more about Late Night Programs</a
-                >
-              </p>
-            </div>
             <p>
               <i
                 >Individuals with disabilities are encouraged to attend all

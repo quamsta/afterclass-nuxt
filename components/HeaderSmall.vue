@@ -1,6 +1,6 @@
 <template>
   <div class="header__container header__container--small">
-    <div class="">
+    <div class="container-fluid">
       <header role="banner">
         <nav class="navbar navbar-main navbar-expand-lg navbar-dark">
           <!-- Navbar brand -->

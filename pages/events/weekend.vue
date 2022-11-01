@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Title>This Weekend</Title>
+    <Head>
+      <Title>This Weekend</Title>
+    </Head>
     <HeaderSmall />
     <div class="container-fluid">
       <h1 class="filter-header">This weekend:</h1>

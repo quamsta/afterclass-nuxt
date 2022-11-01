@@ -13,7 +13,7 @@
           role="main"
         >
           <article>
-            <h1>Add your event</h1>
+            <h1>Add Your Event</h1>
             <div class="content">
               <h2>Step 1. Gather your materials</h2>
               <p>

@@ -1,13 +1,19 @@
 <template>
   <div>
-    <Title>{{ interest.name }}</Title>
+    <Head>
+      <Title>{{ interest.name }}</Title>
+      <MetaImageDefault />
+    </Head>
     <HeaderSmall />
     <div class="container-fluid">
       <h1 class="filter-header">Events tagged as "{{ interest.name }}":</h1>
       <div v-if="interest.id == 7491">
-        <p class="text-center"><a href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs">Learn
-            more about Late
-            Night and Weekend Programs on the Leadership and Engagement wesbite.</a>
+        <p class="text-center">
+          <a
+            href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs"
+            >Learn more about Late Night and Weekend Programs on the Leadership
+            and Engagement wesbite.</a
+          >
         </p>
       </div>
       <EventWall :eventFeed="eventFeed" />
@@ -26,7 +32,6 @@ const eventFeed = ref(
 </script>
   
 <style scoped>
-
 </style>
 
 

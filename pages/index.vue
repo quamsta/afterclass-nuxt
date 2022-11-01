@@ -1,6 +1,10 @@
 <template>
   <div>
     <Head>
+      <Meta
+        name="description"
+        content="After Class: A listing of student-focused events at the University of Iowa"
+      />
       <MetaImageDefault />
     </Head>
     <HeaderLarge />

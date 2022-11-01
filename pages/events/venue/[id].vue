@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Title>{{ venue.name }}</Title>
+    <Head>
+      <Title>{{ venue.name }}</Title>
+      <MetaImageDefault />
+    </Head>
     <HeaderSmall />
     <div class="container-fluid">
       <h1 class="filter-header">Events located at "{{ venue.name }}":</h1>

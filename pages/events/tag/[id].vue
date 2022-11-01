@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Title>{{ tag.name }}</Title>
+    <Head>
+      <Title>{{ tag.name }}</Title>
+      <MetaImageDefault />
+    </Head>
     <HeaderSmall />
     <div class="container-fluid">
       <h1 class="filter-header">Events tagged as "{{ tag.name }}":</h1>

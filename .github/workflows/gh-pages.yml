@@ -3,6 +3,8 @@ name: Publish After Class to GitHub Pages
 # Triggers on pushing to 'main' and 'develop'.
 on:
   workflow_dispatch:
+    branches:
+      - main
   push:
     branches:
       - main

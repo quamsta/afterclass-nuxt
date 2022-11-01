@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Title>Newsletter Creator</Title>
+    <Head>
+      <Title>Newsletter Creator</Title>
+    </Head>
     <HeaderSmall />
     <div class="container">
       <div class="row">

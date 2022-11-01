@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Title>About After Class</Title>
+    <Head>
+      <Title>About After Class</Title>
+      <MetaImageDefault />
+    </Head>
     <HeaderSmall />
 
     <div class="container">

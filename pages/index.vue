@@ -1,5 +1,8 @@
 <template>
   <div>
+    <Head>
+      <MetaImageDefault />
+    </Head>
     <HeaderLarge />
     <div class="container-fluid">
       <EventWall :eventFeed="eventFeed" />
@@ -12,5 +15,4 @@ const eventFeed = ref(await getEvents());
 </script>
 
 <style scoped>
-
 </style>

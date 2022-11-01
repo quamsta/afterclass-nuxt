@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Title>Add Your Event</Title>
+    <Head>
+      <Title>Add Your Event</Title>
+      <MetaImageDefault />
+    </Head>
     <HeaderSmall />
 
     <div class="container">

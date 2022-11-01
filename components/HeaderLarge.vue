@@ -18,7 +18,6 @@
           </div>
         </div>
         <header role="banner">
-          <!--Navbar-->
           <nav class="navbar navbar-main navbar-expand-lg navbar-dark">
             <NuxtLink class="navbar-brand d-lg-none" href="/" aria-label="Home">
               <img class="brand-image" src="~/assets/images/brand-full.png" />

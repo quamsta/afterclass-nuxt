@@ -1,5 +1,5 @@
 function getAfterClassLink(event) {
-  return `https://afterclass.uiowa.edu/events/` + event.id;
+  return `https://afterclass.uiowa.edu/event/` + event.id;
 }
 
 export { getAfterClassLink };

@@ -20,7 +20,12 @@
         <header role="banner">
           <nav class="navbar navbar-main navbar-expand-lg navbar-dark">
             <NuxtLink class="navbar-brand d-lg-none" href="/" aria-label="Home">
-              <img class="brand-image" src="~/assets/images/brand-full.png" />
+              <img
+                class="brand-image"
+                width="1046"
+                height="239"
+                src="~/assets/images/brand-full.png"
+              />
             </NuxtLink>
             <button
               class="navbar-toggler border-0"

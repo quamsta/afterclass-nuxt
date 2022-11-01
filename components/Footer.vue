@@ -19,6 +19,7 @@
               frameborder="0"
               scrolling="no"
               style="border: none; overflow: hidden; width: 100%"
+              loading="lazy"
             ></iframe>
           </div>
         </div>

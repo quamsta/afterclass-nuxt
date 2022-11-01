@@ -182,7 +182,7 @@
             <p>
               <i
                 >Individuals with disabilities are encouraged to attend all
-                University of Iowa–sponsored events. If you are a person with a
+                University of Iowa-sponsored events. If you are a person with a
                 disability who requires a reasonable accommodation in order to
                 participate in this program, please contact
                 {{ eventFetched.contact_name }} in advance at
@@ -190,8 +190,9 @@
                   eventFetched.contact_phone
                 }}</a>
                 or
-                <a :href="'mailto:' + eventFetched.contact_email"
-                  >{{ eventFetched.contact_email }}.</a
+                <a :href="'mailto:' + eventFetched.contact_email">{{
+                  eventFetched.contact_email
+                }}</a
                 >.
               </i>
             </p>
@@ -200,7 +201,7 @@
       </div>
     </div>
 
-    <!-- <h2
+    <h2
       class="text-center pt-4"
       @click="toggleMoreEventsList"
       id="more-events-heading"
@@ -210,7 +211,7 @@
 
     <div v-if="isShowMoreEvents">
       <MoreEvents />
-    </div> -->
+    </div>
   </div>
 </template>
 <script setup>
@@ -242,9 +243,14 @@ function isLateNight() {
     return false;
   }
 }
-
+onMounted(() => {
+  setTimeout(() => {
+    isShowMoreEvents.value = true;
+  }, "500");
+});
 // onMounted(() => {
-//   console.log("mounted more events");
+//   console.log("mounted page");
+//   console.log("isShowMoreEvents: " + isShowMoreEvents.value);
 //   let observerOptions = {
 //     threshold: 0.1,
 //   };
@@ -252,22 +258,16 @@ function isLateNight() {
 //   let observer = new IntersectionObserver(function (entries, observer) {
 //     entries.forEach((entry) => {
 //       if (entry.isIntersecting) {
+//         console.log("loaded more events");
 //         isShowMoreEvents.value = true;
 //       }
 //     });
 //   }, observerOptions);
 //   let target = document.querySelector("#more-events-heading");
-//   console.log("target : " + target);
+//   //console.log("target : " + target);
 //   observer.observe(target);
 // });
 
-// onUnmounted(() => {
-//   console.log("mounted more events");
-// });
-
-// const toggleMoreEventsList = () => {
-//   isShowMoreEvents.value = !isShowMoreEvents.value;
-// };
 //console.log(eventFetched);
 </script>
 

@@ -1,8 +1,5 @@
 import { add, isPast, parseISO, format } from "date-fns";
 
-const preferredLongDateFormat = "EEEE, MMMM d, h:mm aaaa";
-const preferredLongDateFormatAllDay = "EEEE, MMMM d";
-
 function getUpcomingDates(eventInstances) {
   var dates = [];
 
@@ -12,17 +9,11 @@ function getUpcomingDates(eventInstances) {
 
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
-    // Base upcoming events on the day after the event instance
+    // Base upcoming events on the day after the event instance so events stay on the calendar
+    // for the entire day they occur.
     var parsedDateDayAfter = add(parsedDate, { days: 1 });
-    var formattedDate;
-
     if (!isPast(parsedDateDayAfter)) {
-      if (element.event_instance.all_day) {
-        formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
-        formattedDate += " (All Day)";
-      } else {
-        formattedDate = format(parsedDate, preferredLongDateFormat);
-      }
+      var formattedDate = formatEventInstance(element.event_instance);
       dates.push(formattedDate);
     }
   });
@@ -32,25 +23,17 @@ function getUpcomingDates(eventInstances) {
 
 function getPastDates(eventInstances) {
   var dates = [];
-
   if (!eventInstances.length) {
     return false;
   }
-
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
     var parsedDateDayAfter = add(parsedDate, { days: 1 });
-    var formattedDate;
 
     if (isPast(parsedDateDayAfter)) {
-      if (element.event_instance.all_day) {
-        formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
-        formattedDate += " (All Day)";
-      } else {
-        formattedDate = format(parsedDate, preferredLongDateFormat);
-      }
+      var formattedDate = formatEventInstance(element.event_instance);
+      dates.push(formattedDate);
     }
-    dates.push(formattedDate);
   });
 
   return dates;
@@ -61,20 +44,27 @@ function getAllDates(eventInstances) {
   if (!eventInstances.length) {
     return false;
   }
-
   eventInstances.forEach((element, index) => {
-    var parsedDate = parseISO(element.event_instance.start);
-    var formattedDate;
-    if (element.event_instance.all_day) {
-      formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
-      formattedDate += " (All Day)";
-    } else {
-      formattedDate = format(parsedDate, preferredLongDateFormat);
-    }
-
+    var formattedDate = formatEventInstance(element.event_instance);
     dates.push(formattedDate);
   });
   return dates;
+}
+
+function formatEventInstance(eventInstance) {
+  const preferredLongDateFormat = "EEEE, MMMM d, h:mm aaaa";
+  const preferredLongDateFormatAllDay = "EEEE, MMMM d";
+
+  var parsedDate = parseISO(eventInstance.start);
+  var formattedDate = "";
+  if (eventInstance.all_day) {
+    formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
+    formattedDate += " (All Day)";
+  } else {
+    formattedDate = format(parsedDate, preferredLongDateFormat);
+  }
+
+  return formattedDate;
 }
 
 export { getUpcomingDates, getPastDates, getAllDates };

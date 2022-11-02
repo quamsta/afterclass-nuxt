@@ -70,7 +70,7 @@
               <div v-if="upcomingDates.length > 1">
                 <p class="mb-0">
                   <button
-                    class="btn btn-outline-primary mb-2"
+                    class="btn btn-outline-primary mb-1"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseDates"
@@ -91,7 +91,7 @@
               </div>
               <p>
                 <a
-                  class="btn btn-outline-primary mb-1 mx-1"
+                  class="btn btn-outline-primary mb-1 me-1"
                   v-if="eventFetched.virtual_url"
                   :href="eventFetched.virtual_url"
                   rel="noopener"
@@ -114,25 +114,40 @@
                 </a>
               </p>
             </div>
-            <div class="late-night-feature" v-if="isLateNight() == true">
+            <div class="late-night-feature my-4" v-if="isLateNight() == true">
               <p>
                 <img
                   class="late-night-feature__flag"
                   src="~/assets/images/latenightbanner.png"
                   alt="Late Night Programs Flag"
                   role="presentation"
-                />This event is part of Late Night Programs,
-                <NuxtLink href="/events/interest/7491/"
-                  >see more events tagged as Late Night Programs.</NuxtLink
-                >
-              </p>
-              <p class="late-night-feature__smalltext">
+                />This event is part of
                 <a
                   href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs"
                   target="_blank"
-                  >Learn more about Late Night Programs</a
-                >
+                  >Late Night and Weekend Programs</a
+                >. The purpose of Late Night and Weekend Programs is to promote
+                the health, well-being and safety of students by providing
+                opportunities to engage with others and build community in an
+                environment without alcohol.
               </p>
+              <ul>
+                <li>
+                  <a
+                    href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs"
+                    target="_blank"
+                    >Learn more about Late Night and Weekend Programs</a
+                  >
+                </li>
+                <li>
+                  <NuxtLink href="/events/interest/7491/"
+                    >Find more events tagged as Late Night and Weekend
+                    Programs.</NuxtLink
+                  >
+                </li>
+              </ul>
+
+              <p class="late-night-feature__smalltext"></p>
             </div>
             <div
               class="content mb-5"

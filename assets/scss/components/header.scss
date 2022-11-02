@@ -1,7 +1,6 @@
 .navbar-main {
   color: #262626;
   background: #000;
-
   padding: 10px;
 
   .nav-item:after,
@@ -20,7 +19,8 @@
   }
 
   .nav-item:hover:after,
-  .nav-item-active:after {
+  .nav-item-active:after,
+  .nav-item:has(> .nav-link.router-link-exact-active):after {
     @include media-breakpoint-up(lg) {
       background-color: $gray;
       display: block;

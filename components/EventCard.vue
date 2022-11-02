@@ -15,6 +15,7 @@
         :height="event.media[0].original_height"
         :width="event.media[0].original_width"
         :alt="event.media[0].alt_text"
+        :aria-label="event.title"
       />
     </NuxtLink>
     <div class="card-body">

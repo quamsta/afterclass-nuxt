@@ -10,6 +10,7 @@
               width="1046"
               height="239"
               src="~/assets/images/brand-full.png"
+              alt="After Class Logo"
             />
           </NuxtLink>
           <!-- Collapse button -->

@@ -27,7 +27,7 @@
                 <a
                   href="https://leadandengage.uiowa.edu/our-programs/late-night-weekend-programs"
                   target="_blank"
-                  >Learn more on the Late Night and Weekend Programs website</a
+                  >Learn more on the Late Night and Weekend Programs website.</a
                 >
               </li>
               <li>

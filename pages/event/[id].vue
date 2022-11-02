@@ -220,10 +220,7 @@
     >
       More events
     </h2>
-
-    <div v-if="isShowMoreEvents">
-      <MoreEvents />
-    </div>
+    <MoreEvents />
   </div>
 </template>
 <script setup>
@@ -233,9 +230,9 @@ const eventFetched = await getEvent(route.params.id);
 const upcomingDates = getUpcomingDates(eventFetched.value.event_instances);
 const isShowMoreEvents = ref(false);
 const title = eventFetched.value.name;
-const MoreEvents = defineAsyncComponent(() =>
-  import("~/components/MoreEvents.vue")
-);
+// const MoreEvents = defineAsyncComponent(() =>
+//   import("~/components/MoreEvents.vue")
+// );
 
 function isLateNight() {
   if (!eventFetched.value.filters) {

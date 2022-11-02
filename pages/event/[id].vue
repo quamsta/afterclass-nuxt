@@ -221,6 +221,10 @@
       More events
     </h2>
     <MoreEvents />
+
+    <!-- <div v-if="isShowMoreEvents">
+      <MoreEvents />
+    </div> -->
   </div>
 </template>
 <script setup>

@@ -1,6 +1,7 @@
-import { isPast, parseISO, format as dateFormat } from "date-fns";
+import { add, isPast, parseISO, format } from "date-fns";
 
 const preferredLongDateFormat = "EEEE, MMMM d, h:mm aaaa";
+const preferredLongDateFormatAllDay = "EEEE, MMMM d";
 
 function getUpcomingDates(eventInstances) {
   var dates = [];
@@ -11,9 +12,17 @@ function getUpcomingDates(eventInstances) {
 
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
+    // Base upcoming events on the day after the event instance
+    var parsedDateDayAfter = add(parsedDate, { days: 1 });
+    var formattedDate;
 
-    if (!isPast(parsedDate)) {
-      var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
+    if (!isPast(parsedDateDayAfter)) {
+      if (element.event_instance.all_day) {
+        formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
+        formattedDate += " (All Day)";
+      } else {
+        formattedDate = format(parsedDate, preferredLongDateFormat);
+      }
       dates.push(formattedDate);
     }
   });
@@ -30,10 +39,18 @@ function getPastDates(eventInstances) {
 
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
-    if (isPast(parsedDate)) {
-      var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
-      dates.push(formattedDate);
+    var parsedDateDayAfter = add(parsedDate, { days: 1 });
+    var formattedDate;
+
+    if (isPast(parsedDateDayAfter)) {
+      if (element.event_instance.all_day) {
+        formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
+        formattedDate += " (All Day)";
+      } else {
+        formattedDate = format(parsedDate, preferredLongDateFormat);
+      }
     }
+    dates.push(formattedDate);
   });
 
   return dates;
@@ -47,17 +64,18 @@ function getAllDates(eventInstances) {
 
   eventInstances.forEach((element, index) => {
     var parsedDate = parseISO(element.event_instance.start);
-
-    var formattedDate = dateFormat(parsedDate, preferredLongDateFormat);
+    var formattedDate;
+    if (element.event_instance.all_day) {
+      formattedDate = format(parsedDate, preferredLongDateFormatAllDay);
+      formattedDate += " (All Day)";
+    } else {
+      formattedDate = format(parsedDate, preferredLongDateFormat);
+    }
 
     dates.push(formattedDate);
   });
   return dates;
 }
-
-function formatDate(date) {}
-
-function formatDateSmall(date) {}
 
 export {
   getUpcomingDates,

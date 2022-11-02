@@ -99,6 +99,9 @@
 .brand-image {
   width: 150px;
   height: auto;
+  @include media-breakpoint-up(md) {
+    width: 200px;
+  }
 }
 
 .header-graphic__img {

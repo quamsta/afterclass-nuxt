@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from "vue";
 const route = useRoute();
-const venue = await getFilter("places", route.params.id);
+const venue = ref(await getFilter("places", route.params.id));
 const eventFeed = ref(
   await getEvents(null, null, route.params.id, null, null, null)
 );

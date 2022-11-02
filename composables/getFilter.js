@@ -1,17 +1,26 @@
+import { ref } from "vue";
+
 async function getFilter(filterType, id) {
-  const types = await getFilterList(filterType);
+  const types = ref(await getFilterList(filterType));
   // console.log(types);
-  var typeSearch;
   var type;
+
+  //console.log(types.value);
   if (filterType == "keyword") {
-    types.keywords.forEach((element) => {
+    // console.log("searching through keywords...");
+    // console.log(types.value);
+    types.value.keywords.forEach((element) => {
       if (element.id == id) {
+        console.log("found one!");
         type = element;
       }
     });
   } else {
-    types.forEach((element) => {
+    // console.log("searching through other filters");
+    // console.log(types.value);
+    types.value.forEach((element) => {
       if (element.id == id) {
+        // console.log("found one!");
         type = element;
       }
     });
@@ -21,7 +30,7 @@ async function getFilter(filterType, id) {
 }
 
 async function getFilterList(filterType) {
-  var filterList = [];
+  var filterList = ref([]);
   var feedUrl;
   if (filterType == "keyword") {
     feedUrl =
@@ -35,9 +44,9 @@ async function getFilterList(filterType) {
   //console.log(feed.value);
 
   if (filterType == "keyword") {
-    filterList = feed.value;
+    filterList.value = feed.value;
   } else {
-    filterList = feed.value[filterType];
+    filterList.value = feed.value[filterType];
   }
 
   //console.log(interestList);

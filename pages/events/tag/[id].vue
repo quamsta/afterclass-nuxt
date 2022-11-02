@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from "vue";
 const route = useRoute();
-const tag = await getFilter("keyword", route.params.id);
+const tag = ref(await getFilter("keyword", route.params.id));
 // console.log(tag);
 const eventFeed = ref(
   await getEvents(null, null, null, route.params.id, null, null)

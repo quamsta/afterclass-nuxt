@@ -210,7 +210,7 @@
     </h2>
 
     <div v-if="isShowMoreEvents">
-      <!-- <MoreEvents /> -->
+      <MoreEvents />
     </div>
   </div>
 </template>

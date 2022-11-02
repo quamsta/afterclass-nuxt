@@ -63,14 +63,35 @@
                 <EventDate
                   :eventInstances="eventFetched.event_instances"
                   v-if="eventFetched.event_instances"
-                  :showMoreDatesLink="true"
                 />
                 <br />
                 <EventLocation :event="eventFetched" />
               </p>
+              <div v-if="upcomingDates.length > 1">
+                <p class="mb-0">
+                  <button
+                    class="btn btn-outline-primary mb-2"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseDates"
+                    aria-expanded="false"
+                    aria-controls="collapseDates"
+                  >
+                    All upcoming dates
+                    <font-awesome-icon icon="fa-solid fa-plus" />
+                  </button>
+                </p>
+                <div class="collapse" id="collapseDates">
+                  <ul class="mb-3">
+                    <li v-for="date in upcomingDates" :key="date.id">
+                      {{ date }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
               <p>
                 <a
-                  class="btn btn-outline-white mb-1 mx-1"
+                  class="btn btn-outline-primary mb-1 mx-1"
                   v-if="eventFetched.virtual_url"
                   :href="eventFetched.virtual_url"
                   rel="noopener"
@@ -84,7 +105,7 @@
                 <a
                   :href="eventFetched.url"
                   v-if="eventFetched.url"
-                  class="btn btn-outline-white mb-1 mx-1"
+                  class="btn btn-outline-primary mb-1"
                   target="_blank"
                   >Event website
                   <font-awesome-icon
@@ -114,51 +135,26 @@
               </p>
             </div>
             <div
-              class="content"
+              class="content mb-5"
               v-html="eventFetched.description"
               v-if="eventFetched.description"
             ></div>
-            <div
-              class="event-details"
-              id="all-dates"
-              v-if="allDates.length > 1"
-            >
-              <p>
-                <button
-                  class="h2 bg-black p-2 border border-white text-white"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseDates"
-                  aria-expanded="false"
-                  aria-controls="collapseDates"
-                >
-                  All dates for this event
-                  <font-awesome-icon icon="fa-solid fa-plus" />
-                </button>
-              </p>
-              <div class="collapse" id="collapseDates">
-                <div class="card card-body">
-                  <ul>
-                    <li v-for="date in allDates" :key="date.id">{{ date }}</li>
-                  </ul>
-                </div>
-              </div>
 
-              <p v-if="eventFetched.keywords">
-                <EventFilterList type="tag" :filters="eventFetched.keywords" />
-              </p>
+            <p v-if="eventFetched.keywords">
+              <EventFilterList type="tag" :filters="eventFetched.keywords" />
+            </p>
 
-              <p v-if="eventFetched.filters.event_types">
-                <EventFilterList
-                  type="type"
-                  :filters="eventFetched.filters.event_types"
-                />
-              </p>
-            </div>
+            <p v-if="eventFetched.filters.event_types">
+              <EventFilterList
+                type="type"
+                :filters="eventFetched.filters.event_types"
+              />
+            </p>
+
             <p v-if="eventFetched.events_site_url">
               <a
                 :href="eventFetched.events_site_url"
-                class="btn btn-outline-white mb-2"
+                class="btn btn-outline-primary mb-2"
                 target="_blank"
                 >View on the UI Events Calendar
                 <font-awesome-icon
@@ -218,7 +214,7 @@
 import { ref, defineAsyncComponent, onMounted } from "vue";
 const route = useRoute();
 const eventFetched = await getEvent(route.params.id);
-const allDates = getAllDates(eventFetched.value.event_instances);
+const upcomingDates = getUpcomingDates(eventFetched.value.event_instances);
 const isShowMoreEvents = ref(false);
 const title = eventFetched.value.name;
 const MoreEvents = defineAsyncComponent(() =>

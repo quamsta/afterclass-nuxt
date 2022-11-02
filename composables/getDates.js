@@ -77,10 +77,4 @@ function getAllDates(eventInstances) {
   return dates;
 }
 
-export {
-  getUpcomingDates,
-  getPastDates,
-  getAllDates,
-  formatDate,
-  formatDateSmall,
-};
+export { getUpcomingDates, getPastDates, getAllDates };

@@ -5,12 +5,9 @@ async function getFilter(filterType, id) {
   // console.log(types);
   var type;
 
-
-  if (types.value) {
-
-
-    //console.log(types.value);
-    if (filterType == "keyword") {
+  //console.log(types.value);
+  if (filterType == "keyword") {
+    if (types.value.keywords) {
       // console.log("searching through keywords...");
       // console.log(types.value);
       types.value.keywords.forEach((element) => {
@@ -19,7 +16,9 @@ async function getFilter(filterType, id) {
           type = element;
         }
       });
-    } else {
+    }
+  } else {
+    if (types.value.length > 0) {
       // console.log("searching through other filters");
       // console.log(types.value);
       types.value.forEach((element) => {
@@ -29,10 +28,7 @@ async function getFilter(filterType, id) {
         }
       });
     }
-
   }
-
-
 
   return type;
 }

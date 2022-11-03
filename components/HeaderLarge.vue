@@ -9,7 +9,7 @@
                 <img
                   class="header-graphic__img"
                   src="~/assets/images/header.png"
-                  alt="After Class: UI Culture, arts, and entertainment."
+                  alt="After Class: Student Events at Iowa"
                   width="2880"
                   height="786"
                 />

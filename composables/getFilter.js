@@ -5,26 +5,34 @@ async function getFilter(filterType, id) {
   // console.log(types);
   var type;
 
-  //console.log(types.value);
-  if (filterType == "keyword") {
-    // console.log("searching through keywords...");
-    // console.log(types.value);
-    types.value.keywords.forEach((element) => {
-      if (element.id == id) {
-        console.log("found one!");
-        type = element;
-      }
-    });
-  } else {
-    // console.log("searching through other filters");
-    // console.log(types.value);
-    types.value.forEach((element) => {
-      if (element.id == id) {
-        // console.log("found one!");
-        type = element;
-      }
-    });
+
+  if (types.value) {
+
+
+    //console.log(types.value);
+    if (filterType == "keyword") {
+      // console.log("searching through keywords...");
+      // console.log(types.value);
+      types.value.keywords.forEach((element) => {
+        if (element.id == id) {
+          // console.log("found one!");
+          type = element;
+        }
+      });
+    } else {
+      // console.log("searching through other filters");
+      // console.log(types.value);
+      types.value.forEach((element) => {
+        if (element.id == id) {
+          // console.log("found one!");
+          type = element;
+        }
+      });
+    }
+
   }
+
+
 
   return type;
 }

@@ -213,14 +213,14 @@
       </div>
     </div>
 
-    <h2
+    <!-- <h2
       class="text-center pt-4"
       @click="toggleMoreEventsList"
       id="more-events-heading"
     >
       More events
-    </h2>
-    <MoreEvents />
+    </h2> -->
+    <!-- <MoreEvents /> -->
 
     <!-- <div v-if="isShowMoreEvents">
       <MoreEvents />
@@ -230,7 +230,7 @@
 <script setup>
 import { ref, defineAsyncComponent, onMounted } from "vue";
 const route = useRoute();
-const eventFetched = await getEvent(route.params.id);
+const eventFetched = ref(await getEvent(route.params.id));
 const upcomingDates = getUpcomingDates(eventFetched.value.event_instances);
 const isShowMoreEvents = ref(false);
 const title = eventFetched.value.name;
@@ -256,11 +256,11 @@ function isLateNight() {
     return false;
   }
 }
-onMounted(() => {
-  setTimeout(() => {
-    isShowMoreEvents.value = true;
-  }, "500");
-});
+// onMounted(() => {
+//   setTimeout(() => {
+//     isShowMoreEvents.value = true;
+//   }, "500");
+// });
 // onMounted(() => {
 //   console.log("mounted page");
 //   console.log("isShowMoreEvents: " + isShowMoreEvents.value);

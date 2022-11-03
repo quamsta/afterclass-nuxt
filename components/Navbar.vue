@@ -27,8 +27,8 @@
         <ul class="navbar-nav">
           <li class="nav-item me-4">
             <NuxtLink class="nav-link nav-link--large" to="/">
-              <font-awesome-icon icon="fa-solid fa-calendar" class="me-1" />
-              <span>Calendar</span>
+              <font-awesome-icon icon="fa-solid fa-calendar" />
+              Calendar
             </NuxtLink>
           </li>
           <li class="nav-item me-3">
@@ -36,23 +36,18 @@
               class="nav-link nav-link--large"
               href="/events/interest/7491"
             >
-              <font-awesome-icon :icon="['fas', 'moon']" class="me-1" />
-              <span>Late Night</span>
+              <font-awesome-icon :icon="['fas', 'moon']" /> Late Night
             </NuxtLink>
           </li>
           <li class="nav-item me-3">
             <NuxtLink class="nav-link nav-link--large" href="/events/today">
-              <font-awesome-icon icon="fa-solid fa-clock" class="me-1" />
-              <span>Today</span>
+              <font-awesome-icon icon="fa-solid fa-clock" /> Today
             </NuxtLink>
           </li>
           <li class="nav-item me-3">
             <NuxtLink class="nav-link nav-link--large" href="/events/weekend/">
-              <font-awesome-icon
-                icon="fa-solid fa-calendar-week"
-                class="me-1"
-              />
-              <span>Weekend</span>
+              <font-awesome-icon icon="fa-solid fa-calendar-week" />
+              Weekend
             </NuxtLink>
           </li>
 
@@ -62,8 +57,8 @@
               href="/add/"
               title="Add Your Event"
             >
-              <font-awesome-icon icon="fa-solid fa-plus-circle" class="me-1" />
-              <span>Add Your Event</span>
+              <font-awesome-icon icon="fa-solid fa-plus-circle" />
+              Add Your Event
             </NuxtLink>
           </li>
           <li class="nav-item me-3 link nav-item">
@@ -72,8 +67,7 @@
               href="/about-after-class/"
               title="About After Class"
             >
-              <font-awesome-icon icon="fa-solid fa-info-circle" class="me-1" />
-              <span>About</span>
+              <font-awesome-icon icon="fa-solid fa-info-circle" /> About
             </NuxtLink>
           </li>
         </ul>
